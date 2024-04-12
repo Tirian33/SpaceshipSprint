@@ -1,0 +1,219 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8w886bojhjsa"]
+
+[ext_resource type="Script" path="res://Shop/shop.gd" id="1_iyjo4"]
+[ext_resource type="Theme" uid="uid://crop4nf3hph2k" path="res://Shop/ShopTheme.tres" id="1_x47ed"]
+[ext_resource type="PackedScene" uid="uid://bms1p223snqns" path="res://Shop/item.tscn" id="3_cf04j"]
+
+[sub_resource type="Animation" id="Animation_v7epk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1000)]
+}
+
+[sub_resource type="Animation" id="Animation_pt5j7"]
+resource_name = "TransIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -1000), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ifssg"]
+resource_name = "TransOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_doj0a"]
+_data = {
+"RESET": SubResource("Animation_v7epk"),
+"TransIn": SubResource("Animation_pt5j7"),
+"TransOut": SubResource("Animation_ifssg")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd1nq"]
+bg_color = Color(0, 0.0745098, 0.117647, 0.439216)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="Shop" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_iyjo4")
+
+[node name="ShopAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_doj0a")
+}
+
+[node name="Panel" type="Panel" parent="."]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xd1nq")
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1376.0
+offset_top = 28.0
+offset_right = 1476.0
+offset_bottom = 92.0
+theme = ExtResource("1_x47ed")
+text = "Close"
+
+[node name="ShopName" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.0
+offset_top = 16.0
+offset_right = 232.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme = ExtResource("1_x47ed")
+text = "Upgrade Shop
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gold" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 28.0
+offset_right = 272.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 32
+text = "$"
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = 180.0
+offset_right = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 160
+theme_override_constants/v_separation = 216
+columns = 9
+
+[node name="Item1" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item2" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item3" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item4" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item5" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item6" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item7" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item8" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item9" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item10" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item11" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item12" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item13" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item14" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item15" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item16" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item17" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item18" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item19" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item20" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item21" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item22" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item23" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item24" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item25" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item26" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="Item27" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]

@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://crop4nf3hph2k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uq5oh"]
+bg_color = Color(0.25098, 0.392157, 0.556863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.173572, 0.284498, 0.413614, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.00392157, 0.0117647, 0.0235294, 1)
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4pm4"]
+bg_color = Color(0.173572, 0.284498, 0.413614, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.173572, 0.284498, 0.413614, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.00431161, 0.0117363, 0.0252334, 1)
+
+[resource]
+default_font_size = 32
+Button/styles/normal = SubResource("StyleBoxFlat_uq5oh")
+Label/styles/normal = SubResource("StyleBoxFlat_e4pm4")
