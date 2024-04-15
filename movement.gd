@@ -34,9 +34,11 @@ func _process(delta):
 	backgroundC.offset += backgroundVelocity * delta
 
 	if Input.is_action_pressed("move"):
+		spaceship.animation = "on"
 		if spaceship.rotation >= spaceshipUp:
 			spaceship.rotation -= deg_to_rad(rotateSpeed) * delta
 	else:
+		spaceship.animation = "off"
 		if spaceship.rotation <= spaceshipDown:
 			spaceship.rotation += deg_to_rad(rotateSpeed) * delta
 
