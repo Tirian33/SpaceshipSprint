@@ -121,6 +121,26 @@ theme_override_font_sizes/font_size = 32
 text = "$"
 vertical_alignment = 1
 
+[node name="Warning" type="Label" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -206.0
+offset_top = 111.0
+offset_right = 206.0
+offset_bottom = 159.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Not Enough Gold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="Panel/Warning"]
+wait_time = 5.0
+autostart = true
+
 [node name="GridContainer" type="GridContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
@@ -135,85 +155,17 @@ theme_override_constants/h_separation = 160
 theme_override_constants/v_separation = 216
 columns = 9
 
-[node name="Item1" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+[node name="0" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
 
-[node name="Item2" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+[node name="1" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
 
-[node name="Item3" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+[node name="2" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
 
-[node name="Item4" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item5" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item6" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item7" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item8" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item9" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item10" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item11" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item12" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item13" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item14" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item15" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item16" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item17" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item18" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item19" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item20" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item21" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item22" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item23" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item24" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item25" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item26" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
-layout_mode = 2
-
-[node name="Item27" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+[node name="3" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
 
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="timeout" from="Panel/Warning/Timer" to="." method="_on_timer_timeout"]
