@@ -55,8 +55,8 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_x14yo")
 animation = &"on"
 
-[node name="thruster" type="AudioStreamPlayer2D" parent="."]
+[node name="thruster-sfx" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_t5mdd")
-volume_db = -6.3
+volume_db = -11.774
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered_player"]
