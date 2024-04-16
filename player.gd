@@ -1,8 +1,8 @@
 extends Area2D
 
-@onready var spaceship = $Spaceship
+signal death
 
-@export var speed = 500
+@onready var spaceship = $Spaceship
 @export var cust_grav = 250
 @export var rotateSpeed = 90
 
@@ -27,12 +27,16 @@ func _process(delta):
 
 	var pointing = ((rad_to_deg(spaceship.rotation) - 90) / 30)
 	spaceship.position += Vector2.DOWN * cust_grav * delta * pointing
+	
+	if spaceship.position.y < -1 or spaceship.position.y > 649:
+		print_debug("death")
+		emit_signal("death")
 
 func start(pos):
 	spaceship.position = pos #75, 324
 
 #poweupstates can be handled here
 func _on_body_entered_player(body):
-	hide()
-	print_debug("FFS")
-	$CollisionShape2D.set_deferred("disabled", true)
+	#hide()
+	print_debug(body.name)
+	#$CollisionShape2D.set_deferred("disabled", true)

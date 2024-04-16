@@ -13,21 +13,24 @@ curve = SubResource("Curve_ovufe")
 lifetime_randomness = 0.2
 emission_shape = 3
 emission_box_extents = Vector3(576, 324, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
 scale_max = 1.4
 scale_curve = SubResource("CurveTexture_t7acg")
 
 [node name="background" type="Node"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0, 0, 0, 1)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
-position = Vector2(576, 324)
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(700, 324)
+scale = Vector2(0.85, 1)
 amount = 68
 process_material = SubResource("ParticleProcessMaterial_yvajg")
 texture = ExtResource("1_ylr3m")
