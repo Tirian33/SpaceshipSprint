@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bms1p223snqns"]
+[gd_scene load_steps=5 format=3 uid="uid://bms1p223snqns"]
 
 [ext_resource type="Script" path="res://Shop/item.gd" id="1_f3q3m"]
 [ext_resource type="Texture2D" uid="uid://bixmwe0dih621" path="res://images/rocket-1.png" id="1_sm57q"]
@@ -8,6 +8,10 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6n2ye"]
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [node name="Item" type="Control"]
 texture_filter = 1
@@ -21,8 +25,8 @@ script = ExtResource("1_f3q3m")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 200.0
+offset_right = 100.0
+offset_bottom = 150.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_w63mj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
@@ -42,14 +46,20 @@ stretch_mode = 5
 
 [node name="ItemName" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Name"
 horizontal_alignment = 1
 
 [node name="ItemCost" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Cost"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_6n2ye")
 text = "Purchase"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]
