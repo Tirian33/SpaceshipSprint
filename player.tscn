@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://chyyxojx7m5sk"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_6kyja"]
+[ext_resource type="Texture2D" uid="uid://rv7gi55qe7ld" path="res://images/rocket-1-off.png" id="2_npvkg"]
+[ext_resource type="Texture2D" uid="uid://dlek1heerqgje" path="res://images/rocket-1-on/rocket-1-on.png" id="3_xdxjs"]
+[ext_resource type="Texture2D" uid="uid://d0y4hx2uajddb" path="res://images/rocket-1-on/rocket-2-on.png" id="4_h3qp5"]
+[ext_resource type="Texture2D" uid="uid://bxet2cpo7sfvk" path="res://images/rocket-1-on/rocket-3-on.png" id="5_akkwx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8r4hr"]
+radius = 84.0
+height = 384.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x14yo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_npvkg")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xdxjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h3qp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_akkwx")
+}],
+"loop": true,
+"name": &"on",
+"speed": 8.0
+}]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_6kyja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(72, 324)
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+shape = SubResource("CapsuleShape2D_8r4hr")
+
+[node name="Spaceship" type="AnimatedSprite2D" parent="."]
+position = Vector2(75, 324)
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_x14yo")
+animation = &"on"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered_player"]

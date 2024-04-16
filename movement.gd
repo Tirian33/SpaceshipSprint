@@ -44,3 +44,9 @@ func _process(delta):
 
 	var pointing = ((rad_to_deg(spaceship.rotation) - 90) / 30)
 	spaceship.position += Vector2.DOWN * gravity * delta * pointing
+	print_debug(spaceship.position)
+
+
+func _on_player_collision(body):
+	spaceship.hide()
+	pass # Replace with function body.
