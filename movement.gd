@@ -17,7 +17,7 @@ func _ready():
 	screen_size = get_viewport().get_visible_rect().size
 	is_game_running = true
 	new_game()
-	$AsteroidTimer.start()
+	
 
 
 func new_game():
@@ -27,6 +27,7 @@ func new_game():
 	scroll = 0
 	asteroids.clear()
 	generate_asteroids()
+	$AsteroidTimer.start()
 
 
 func _process(delta):
@@ -80,5 +81,6 @@ func _on_player_death():
 	$"BGM-Generic".stop()
 	for obj in asteroids:
 		obj.queue_free()
+	asteroids.clear()
 	$"LoseScreen".show()
 	pass # Replace with function body.
