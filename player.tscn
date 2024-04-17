@@ -40,17 +40,16 @@ data = PackedByteArray(255, 243, 132, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 loop = true
 
 [node name="Player" type="Area2D"]
+position = Vector2(75, 324)
+rotation = 1.5708
 script = ExtResource("1_6kyja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(72, 324)
-rotation = 1.5708
 scale = Vector2(0.25, 0.25)
 shape = SubResource("CapsuleShape2D_8r4hr")
+debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Spaceship" type="AnimatedSprite2D" parent="."]
-position = Vector2(75, 324)
-rotation = 1.5708
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_x14yo")
 animation = &"on"

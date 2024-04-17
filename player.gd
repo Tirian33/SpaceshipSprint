@@ -21,8 +21,8 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("move"):
 		spaceship.animation = "on"
-		if spaceship.rotation >= spaceshipUp:
-			spaceship.rotation -= deg_to_rad(rotateSpeed) * delta
+		if rotation >= spaceshipUp:
+			rotation -= deg_to_rad(rotateSpeed) * delta
 		
 		if not playing_sound:
 			sfx.play()
@@ -30,17 +30,17 @@ func _process(delta):
 		
 	else:
 		spaceship.animation = "off"
-		if spaceship.rotation <= spaceshipDown:
-			spaceship.rotation += deg_to_rad(rotateSpeed) * delta
+		if rotation <= spaceshipDown:
+			rotation += deg_to_rad(rotateSpeed) * delta
 		
 		if playing_sound:
 			sfx.stop()
 			playing_sound = false
 
-	var pointing = ((rad_to_deg(spaceship.rotation) - 90) / 30)
-	spaceship.position += Vector2.DOWN * cust_grav * delta * pointing
+	var pointing = ((rad_to_deg(rotation) - 90) / 30)
+	position += Vector2.DOWN * cust_grav * delta * pointing
 	
-	if spaceship.position.y < -1 or spaceship.position.y > 649:
+	if position.y < -1 or position.y > 649:
 		#print_debug("death")
 		emit_signal("death")
 
