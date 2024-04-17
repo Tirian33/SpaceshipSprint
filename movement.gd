@@ -36,6 +36,10 @@ func _process(delta):
 		
 		for asteroid in asteroids:
 			asteroid.position.x -= SCROLL_SPEED
+		
+		
+		if $"Player/Pause Active Node/Continue Button".visible == false:
+			$"Player/Pause Active Node/Menu Button".visible = false
 
 
 func _on_asteroid_timer_timeout():
@@ -58,3 +62,10 @@ func generate_asteroids():
 	
 	add_child(asteroid)
 	asteroids.append(asteroid)
+
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		$"Player/Pause Active Node/Continue Button".visible = true 
+		$"Player/Pause Active Node/Menu Button".visible = true
+		get_tree().set_deferred("paused", true)

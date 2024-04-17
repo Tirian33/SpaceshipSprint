@@ -51,4 +51,5 @@ func start(pos):
 func _on_area_entered_player(area):
 	#hide()
 	print_debug(area.name)
+	get_tree().change_scene_to_file("res://lose_screen.tscn")
 	#$CollisionShape2D.set_deferred("disabled", true)
