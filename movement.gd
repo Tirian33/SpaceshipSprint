@@ -1,46 +1,60 @@
 extends Node
 
-@export var speed = 500
-@export var gravity = 250
-@export var rotateSpeed = 90
+var is_game_running: bool
+var random = RandomNumberGenerator.new()
 
-@onready var spaceship = $"CanvasLayer/Spaceship"
-@onready var screen_size = DisplayServer.window_get_size()
-@onready var backgroundA = $"backgroundA/CanvasLayer"
-@onready var backgroundB = $"backgroundB/CanvasLayer"
-@onready var backgroundC = $"backgroundC/CanvasLayer"
+# Asteroid Settings
+@export var asteroid_scene : PackedScene
+var screen_size : Vector2
+var asteroids : Array
+var scroll : int
+const ASTEROID_DELAY : int = 100
+const ASTEROID_RANGE : int = 300
+const SCROLL_SPEED : int = 4
 
-var spaceshipDown = deg_to_rad(120)
-var spaceshipUp = deg_to_rad(60)
 
 func _ready():
-	backgroundB.offset.x = screen_size.x
-	backgroundC.offset.x = 2 * screen_size.x
-	spaceship.play()
+	screen_size = get_viewport().get_visible_rect().size
+	is_game_running = true
+	new_game()
+	$AsteroidTimer.start()
+
+
+func new_game():
+	scroll = 0
+	asteroids.clear()
+	generate_asteroids()
+
 
 func _process(delta):
-	if backgroundA.offset.x <= -screen_size.x * 1.5:
-		backgroundA.offset.x = backgroundC.offset.x + screen_size.x
+	#print(Engine.get_frames_per_second())
+	
+	if is_game_running:
+		scroll += SCROLL_SPEED
+		if scroll >= screen_size.x:
+			scroll = 0
+		
+		for asteroid in asteroids:
+			asteroid.position.x -= SCROLL_SPEED
 
-	if backgroundB.offset.x <= -screen_size.x * 1.5:
-		backgroundB.offset.x = backgroundA.offset.x + screen_size.x
 
-	if backgroundC.offset.x <= -screen_size.x * 1.5:
-		backgroundC.offset.x = backgroundB.offset.x + screen_size.x
+func _on_asteroid_timer_timeout():
+	generate_asteroids()
 
-	var backgroundVelocity = Vector2.LEFT * speed
-	backgroundA.offset += backgroundVelocity * delta
-	backgroundB.offset += backgroundVelocity * delta
-	backgroundC.offset += backgroundVelocity * delta
 
-	if Input.is_action_pressed("move"):
-		spaceship.animation = "on"
-		if spaceship.rotation >= spaceshipUp:
-			spaceship.rotation -= deg_to_rad(rotateSpeed) * delta
-	else:
-		spaceship.animation = "off"
-		if spaceship.rotation <= spaceshipDown:
-			spaceship.rotation += deg_to_rad(rotateSpeed) * delta
-
-	var pointing = ((rad_to_deg(spaceship.rotation) - 90) / 30)
-	spaceship.position += Vector2.DOWN * gravity * delta * pointing
+func generate_asteroids():
+	random.randomize()
+	
+	var asteroid : Area2D = asteroid_scene.instantiate()
+	asteroid.position.x = screen_size.x + ASTEROID_DELAY
+	asteroid.position.y = screen_size.y / 2 + random.randi_range(-ASTEROID_RANGE, ASTEROID_RANGE)
+	
+	# Change asteroid sprite
+	var asteroid_sprite : AnimatedSprite2D = asteroid.get_node("./AnimatedSprite2D")
+	asteroid_sprite.frame = random.randi_range(0, 31)
+	
+	# function to handle spaceship asteroid collision goes here
+	#asteroid.hit.connect(player_hit)
+	
+	add_child(asteroid)
+	asteroids.append(asteroid)
