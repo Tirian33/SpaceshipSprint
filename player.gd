@@ -48,7 +48,7 @@ func start(pos):
 	spaceship.position = pos #75, 324
 
 #poweupstates can be handled here
-func _on_body_entered_player(body):
+func _on_area_entered_player(area):
 	#hide()
-	print_debug(body.name)
+	print_debug(area.name)
 	#$CollisionShape2D.set_deferred("disabled", true)

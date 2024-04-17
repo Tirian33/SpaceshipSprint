@@ -58,4 +58,4 @@ animation = &"on"
 stream = SubResource("AudioStreamMP3_t5mdd")
 volume_db = -6.3
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered_player"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered_player"]
