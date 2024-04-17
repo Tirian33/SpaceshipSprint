@@ -46,8 +46,11 @@ func _process(delta):
 			#print_debug("death")
 			die()
 
-func start(pos):
-	spaceship.position = pos #75, 324
+func start():
+	print_debug("RESTART")
+	position.x = 75
+	position.y = 324 #75, 324
+	alive = true
 
 func die():
 	alive = false

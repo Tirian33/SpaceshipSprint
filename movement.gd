@@ -22,6 +22,7 @@ func _ready():
 
 func new_game():
 	$"BGM-Generic".play()
+	$Player.start()
 	is_game_running = true
 	scroll = 0
 	asteroids.clear()

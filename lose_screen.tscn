@@ -4,16 +4,24 @@
 [ext_resource type="Script" path="res://lose_screen.gd" id="2_pek7y"]
 
 [node name="LoseScreen" type="Sprite2D"]
-position = Vector2(576, 325)
-scale = Vector2(1.67429, 1.8324)
+position = Vector2(576, 324)
+scale = Vector2(1.64571, 1.81006)
 texture = ExtResource("1_jdhrx")
 script = ExtResource("2_pek7y")
 
+[node name="AgainButton" type="Button" parent="."]
+offset_left = -59.0
+offset_top = -27.0
+offset_right = 77.0
+offset_bottom = 13.0
+text = "Play Again"
+
 [node name="MenuButton" type="Button" parent="."]
-offset_left = -59.1297
-offset_top = -27.8323
-offset_right = 76.8703
-offset_bottom = 12.1677
+offset_left = -59.0
+offset_top = 25.0
+offset_right = 77.0
+offset_bottom = 65.0
 text = "Main Menu"
 
+[connection signal="pressed" from="AgainButton" to="." method="_on_again_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
