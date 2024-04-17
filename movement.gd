@@ -21,6 +21,8 @@ func _ready():
 
 
 func new_game():
+	$"BGM-Generic".play()
+	is_game_running = true
 	scroll = 0
 	asteroids.clear()
 	generate_asteroids()
@@ -69,3 +71,13 @@ func _input(event):
 		$"Player/Pause Active Node/Continue Button".visible = true 
 		$"Player/Pause Active Node/Menu Button".visible = true
 		get_tree().set_deferred("paused", true)
+
+
+func _on_player_death():
+	is_game_running = false
+	$AsteroidTimer.stop()
+	$"BGM-Generic".stop()
+	for obj in asteroids:
+		obj.queue_free()
+	$"LoseScreen".show()
+	pass # Replace with function body.

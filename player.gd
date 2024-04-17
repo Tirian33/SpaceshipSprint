@@ -10,6 +10,7 @@ signal death
 var spaceshipDown = deg_to_rad(120)
 var spaceshipUp = deg_to_rad(60)
 var playing_sound = false
+var alive = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,37 +20,42 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("move"):
-		spaceship.animation = "on"
-		if rotation >= spaceshipUp:
-			rotation -= deg_to_rad(rotateSpeed) * delta
-		
-		if not playing_sound:
-			sfx.play()
-			playing_sound = true
-		
-	else:
-		spaceship.animation = "off"
-		if rotation <= spaceshipDown:
-			rotation += deg_to_rad(rotateSpeed) * delta
-		
-		if playing_sound:
-			sfx.stop()
-			playing_sound = false
+	if alive:
+		if Input.is_action_pressed("move"):
+			spaceship.animation = "on"
+			if rotation >= spaceshipUp:
+				rotation -= deg_to_rad(rotateSpeed) * delta
+			
+			if not playing_sound:
+				sfx.play()
+				playing_sound = true
+			
+		else:
+			spaceship.animation = "off"
+			if rotation <= spaceshipDown:
+				rotation += deg_to_rad(rotateSpeed) * delta
+			
+			if playing_sound:
+				sfx.stop()
+				playing_sound = false
 
-	var pointing = ((rad_to_deg(rotation) - 90) / 30)
-	position += Vector2.DOWN * cust_grav * delta * pointing
-	
-	if position.y < -1 or position.y > 649:
-		#print_debug("death")
-		emit_signal("death")
+		var pointing = ((rad_to_deg(rotation) - 90) / 30)
+		position += Vector2.DOWN * cust_grav * delta * pointing
+		
+		if position.y < -1 or position.y > 649:
+			#print_debug("death")
+			die()
 
 func start(pos):
 	spaceship.position = pos #75, 324
+
+func die():
+	alive = false
+	emit_signal("death")
 
 #poweupstates can be handled here
 func _on_area_entered_player(area):
 	#hide()
 	print_debug(area.name)
-	get_tree().change_scene_to_file("res://lose_screen.tscn")
+	die()
 	#$CollisionShape2D.set_deferred("disabled", true)

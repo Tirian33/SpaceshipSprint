@@ -20,12 +20,21 @@ text = "Start
 "
 
 [node name="ShopButton" type="Button" parent="."]
-offset_left = 442.0
-offset_top = 328.0
-offset_right = 690.0
-offset_bottom = 406.0
+offset_left = 441.0
+offset_top = 329.0
+offset_right = 689.0
+offset_bottom = 407.0
 text = "Shop
+"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 441.0
+offset_top = 429.0
+offset_right = 689.0
+offset_bottom = 507.0
+text = "Quit
 "
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
