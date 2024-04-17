@@ -1,0 +1,52 @@
+{
+	"Gold": 1000,
+	"0":{
+		"Name": "MIDAS",
+		"Cost": 10,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "Increase the rate of gold appearing by x",
+		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+	},
+	"1":{
+		"Name": "Booster",
+		"Cost": 20,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "Give a headstart x distance",
+		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+	},
+	"2":{
+		"Name": "Shield",
+		"Cost": 30,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "Gain a shield for x seconds every y second",
+		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+	},
+	"3":{
+		"Name": "More Value",
+		"Cost": 40,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "Increase the value of each gold",
+		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+	},
+	"4":{
+		"Name": "Rocket 1",
+		"Cost": 50,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+	},
+	"5":{
+		"Name": "Rocket 2",
+		"Cost": 50,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/rocket-1-on/rocket-2-on.png"
+	},
+	
+}
