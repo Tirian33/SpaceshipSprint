@@ -1,0 +1,24 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=4 format=3 uid="uid://cg5mu2kh3rttd"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_8mhc8"]
+
+[sub_resource type="Curve" id="Curve_ovufe"]
+_data = [Vector2(0, 0.857143), 0.0, 0.0, 0, 0, Vector2(0.233333, 1), 0.0, 0.0, 0, 0, Vector2(0.76, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.538462), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_t7acg"]
+curve = SubResource("Curve_ovufe")
+
+[resource]
+lifetime_randomness = 0.2
+emission_shape_offset = Vector3(0, -350, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+directional_velocity_min = -150.0
+directional_velocity_max = -150.0
+directional_velocity_curve = SubResource("CurveXYZTexture_8mhc8")
+gravity = Vector3(0, 0, 0)
+scale_max = 1.4
+scale_curve = SubResource("CurveTexture_t7acg")

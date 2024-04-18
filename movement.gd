@@ -99,6 +99,7 @@ func _on_player_make_gold():
 
 func _on_player_return_normal():
 	print_debug("Making normal asteroids and slowing down.")
+	$background.go_normal()
 	asteroid_type = ""
 	fast_asteroids = false
 
@@ -106,3 +107,4 @@ func _on_player_return_normal():
 func _on_player_go_fast():
 	print_debug("Asteroids going fast.")
 	fast_asteroids = true
+	$background.go_fast()
