@@ -58,4 +58,9 @@ animation = &"on"
 stream = SubResource("AudioStreamMP3_t5mdd")
 volume_db = -6.3
 
+[node name="PowerUpTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered_player"]
+[connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]

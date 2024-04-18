@@ -1,11 +1,17 @@
 extends Area2D
 
 signal death
+signal make_gold
+signal return_normal
+signal go_fast
 
 @onready var spaceship = $Spaceship
 @onready var sfx = $thruster
+@onready var powerUpTimer = $PowerUpTimer
 @export var cust_grav = 250
 @export var rotateSpeed = 90
+@export var powerUpState = ""
+@export var powerUpDuration = 15
 
 var spaceshipDown = deg_to_rad(120)
 var spaceshipUp = deg_to_rad(60)
@@ -43,8 +49,8 @@ func _process(delta):
 		position += Vector2.DOWN * cust_grav * delta * pointing
 		
 		if position.y < -1 or position.y > 649:
-			#print_debug("death")
 			die()
+
 
 func start():
 	print_debug("RESTART")
@@ -52,13 +58,67 @@ func start():
 	position.y = 324 #75, 324
 	alive = true
 
+
 func die():
 	alive = false
-	emit_signal("death")
+	send_normal_signals()
+	powerUpState = ""
+	powerUpTimer.stop()
+	death.emit()
 
-#poweupstates can be handled here
+
+func send_normal_signals():
+	# Signal existing asteroids to become normal
+	get_tree().call_group("asteroids", "become_normal")
+	# Signal asteroid generate to generate normal asteroids at normal speed
+	return_normal.emit()
+
+
+# TODO: Change to separate functions that activate on appropriate power up collision
+func _input(event):
+	if event.is_action_pressed("shield"):
+		print_debug("shield")
+		powerUpState = "shield"
+
+		send_normal_signals()
+
+		powerUpTimer.start(powerUpDuration)
+
+	if event.is_action_pressed("midas"):
+		print_debug("midas")
+		powerUpState = "midas"
+
+		send_normal_signals()
+
+		# Signal existing asteroids to become gold
+		get_tree().call_group("asteroids", "become_gold")
+		# Signal asteroid generate to generate gold asteroids
+		make_gold.emit()
+
+		powerUpTimer.start(powerUpDuration)
+
+	if event.is_action_pressed("fast"):
+		print_debug("fast")
+		powerUpState = "fast"
+
+		send_normal_signals()
+		go_fast.emit()
+
+		powerUpTimer.start(powerUpDuration)
+
+
 func _on_area_entered_player(area):
-	#hide()
-	print_debug(area.name)
-	die()
-	#$CollisionShape2D.set_deferred("disabled", true)
+	if powerUpState == "shield":
+		area.break_apart()
+	elif powerUpState == "midas":
+		area.become_coin()
+	else:
+		die()
+
+
+func _on_power_up_timer_timeout():
+	print_debug("normal")
+
+	send_normal_signals()
+
+	powerUpState = ""

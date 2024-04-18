@@ -5,6 +5,8 @@ var random = RandomNumberGenerator.new()
 
 # Asteroid Settings
 @export var asteroid_scene : PackedScene
+var asteroid_type = ""
+var fast_asteroids = false
 var screen_size : Vector2
 var asteroids : Array
 var scroll : int
@@ -17,7 +19,6 @@ func _ready():
 	screen_size = get_viewport().get_visible_rect().size
 	is_game_running = true
 	new_game()
-	
 
 
 func new_game():
@@ -30,7 +31,7 @@ func new_game():
 	$AsteroidTimer.start()
 
 
-func _process(delta):
+func _process(_delta):
 	#print(Engine.get_frames_per_second())
 	
 	if is_game_running:
@@ -39,7 +40,11 @@ func _process(delta):
 			scroll = 0
 		
 		for asteroid in asteroids:
-			asteroid.position.x -= SCROLL_SPEED
+			if is_instance_valid(asteroid):
+				if fast_asteroids:
+					asteroid.position.x -= SCROLL_SPEED * 2
+				else:
+					asteroid.position.x -= SCROLL_SPEED
 		
 		
 		if $"Player/Pause Active Node/Continue Button".visible == false:
@@ -60,9 +65,9 @@ func generate_asteroids():
 	# Change asteroid sprite
 	var asteroid_sprite : AnimatedSprite2D = asteroid.get_node("./AnimatedSprite2D")
 	asteroid_sprite.frame = random.randi_range(0, 31)
-	
-	# function to handle spaceship asteroid collision goes here
-	#asteroid.hit.connect(player_hit)
+
+	if asteroid_type == "gold":
+		asteroid.become_gold()
 	
 	add_child(asteroid)
 	asteroids.append(asteroid)
@@ -79,8 +84,25 @@ func _on_player_death():
 	is_game_running = false
 	$AsteroidTimer.stop()
 	$"BGM-Generic".stop()
-	for obj in asteroids:
-		obj.queue_free()
+	for asteroid in asteroids:
+		if is_instance_valid(asteroid):
+			asteroid.queue_free()
 	asteroids.clear()
 	$"LoseScreen".show()
 	pass # Replace with function body.
+
+
+func _on_player_make_gold():
+	print_debug("Making gold asteroids.")
+	asteroid_type = "gold"
+
+
+func _on_player_return_normal():
+	print_debug("Making normal asteroids and slowing down.")
+	asteroid_type = ""
+	fast_asteroids = false
+
+
+func _on_player_go_fast():
+	print_debug("Asteroids going fast.")
+	fast_asteroids = true
