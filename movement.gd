@@ -6,10 +6,10 @@ var random = RandomNumberGenerator.new()
 # Asteroid Settings
 @export var asteroid_scene : PackedScene
 var asteroid_type = ""
-var fast_asteroids = false
 var screen_size : Vector2
 var asteroids : Array
 var scroll : int
+var scroll_mult = 1.0
 const ASTEROID_DELAY : int = 100
 const ASTEROID_RANGE : int = 300
 const SCROLL_SPEED : int = 4
@@ -33,20 +33,16 @@ func new_game():
 
 func _process(_delta):
 	#print(Engine.get_frames_per_second())
-	
+
 	if is_game_running:
 		scroll += SCROLL_SPEED
 		if scroll >= screen_size.x:
 			scroll = 0
-		
+
 		for asteroid in asteroids:
 			if is_instance_valid(asteroid):
-				if fast_asteroids:
-					asteroid.position.x -= SCROLL_SPEED * 2
-				else:
-					asteroid.position.x -= SCROLL_SPEED
-		
-		
+				asteroid.position.x -= SCROLL_SPEED * scroll_mult
+
 		if $"Player/Pause Active Node/Continue Button".visible == false:
 			$"Player/Pause Active Node/Menu Button".visible = false
 
@@ -68,7 +64,9 @@ func generate_asteroids():
 
 	if asteroid_type == "gold":
 		asteroid.become_gold()
-	
+	if asteroid_type == "rainbow":
+		asteroid.become_rainbow()
+
 	add_child(asteroid)
 	asteroids.append(asteroid)
 
@@ -99,12 +97,21 @@ func _on_player_make_gold():
 
 func _on_player_return_normal():
 	print_debug("Making normal asteroids and slowing down.")
+	$AsteroidTimer.wait_time = 0.4
 	$background.go_normal()
 	asteroid_type = ""
-	fast_asteroids = false
+	scroll_mult = 1.0
 
 
 func _on_player_go_fast():
 	print_debug("Asteroids going fast.")
-	fast_asteroids = true
+	scroll_mult = 2.0
 	$background.go_fast()
+
+
+func _on_player_go_rainbow():
+	print_debug("Making rainbow asteroids and stars.")
+	asteroid_type = "rainbow"
+	scroll_mult = 4.0
+	$AsteroidTimer.wait_time = 0.1
+	$background.go_rainbow()

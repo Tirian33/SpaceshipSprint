@@ -4,6 +4,7 @@ signal death
 signal make_gold
 signal return_normal
 signal go_fast
+signal go_rainbow
 
 @onready var spaceship = $Spaceship
 @onready var sfx = $thruster
@@ -106,11 +107,25 @@ func _input(event):
 
 		powerUpTimer.start(powerUpDuration)
 
+	if event.is_action_pressed("rainbow"):
+		print_debug("rainbow")
+		powerUpState = "rainbow"
+
+		send_normal_signals()
+		# Signal existing asteroids to become rainbow
+		get_tree().call_group("asteroids", "become_rainbow")
+		# Signal asteroid generate to generate rainbow asteroids
+		go_rainbow.emit()
+
+		powerUpTimer.start(powerUpDuration)
+
 
 func _on_area_entered_player(area):
 	if powerUpState == "shield":
 		area.break_apart()
 	elif powerUpState == "midas":
+		area.become_coin()
+	elif powerUpState == "rainbow":
 		area.become_coin()
 	else:
 		die()

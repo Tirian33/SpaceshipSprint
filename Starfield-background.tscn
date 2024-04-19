@@ -30,3 +30,12 @@ process_material = ExtResource("4_cqe12")
 texture = ExtResource("1_ylr3m")
 lifetime = 30.0
 visibility_rect = Rect2(-576, -324, 576, 648)
+
+[node name="GPUParticles2DTurbo" type="GPUParticles2D" parent="."]
+position = Vector2(1243, 324)
+scale = Vector2(0.85, 1)
+amount = 500
+process_material = ExtResource("4_cqe12")
+texture = ExtResource("1_ylr3m")
+lifetime = 30.0
+visibility_rect = Rect2(-576, -324, 576, 648)
