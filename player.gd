@@ -66,6 +66,7 @@ func die():
 	powerUpState = ""
 	powerUpTimer.stop()
 	death.emit()
+	cust_grav = 250
 
 
 func send_normal_signals():

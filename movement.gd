@@ -9,10 +9,11 @@ var asteroid_type = ""
 var screen_size : Vector2
 var asteroids : Array
 var scroll : int
-var scroll_mult = 1.0
+var scroll_speed : int = 4 #4 = normal; 8 = 2x ...
+var scroll_target : int = 4
 const ASTEROID_DELAY : int = 100
 const ASTEROID_RANGE : int = 300
-const SCROLL_SPEED : int = 4
+
 
 
 func _ready():
@@ -31,17 +32,18 @@ func new_game():
 	$AsteroidTimer.start()
 
 
+
 func _process(_delta):
 	#print(Engine.get_frames_per_second())
 
 	if is_game_running:
-		scroll += SCROLL_SPEED
-		if scroll >= screen_size.x:
-			scroll = 0
+		#scroll += SCROLL_SPEED
+		#if scroll >= screen_size.x:
+			#scroll = 0
 
 		for asteroid in asteroids:
 			if is_instance_valid(asteroid):
-				asteroid.position.x -= SCROLL_SPEED * scroll_mult
+				asteroid.position.x -= scroll_speed
 
 		if $"Player/Pause Active Node/Continue Button".visible == false:
 			$"Player/Pause Active Node/Menu Button".visible = false
@@ -82,36 +84,62 @@ func _on_player_death():
 	is_game_running = false
 	$AsteroidTimer.stop()
 	$"BGM-Generic".stop()
+	$SpeedRampTimer.stop()
 	for asteroid in asteroids:
 		if is_instance_valid(asteroid):
 			asteroid.queue_free()
 	asteroids.clear()
+	scroll_speed = 4
 	$"LoseScreen".show()
 	pass # Replace with function body.
 
 
 func _on_player_make_gold():
-	print_debug("Making gold asteroids.")
+	#print_debug("Making gold asteroids.")
 	asteroid_type = "gold"
 
 
 func _on_player_return_normal():
-	print_debug("Making normal asteroids and slowing down.")
+	#print_debug("Making normal asteroids and slowing down.")
 	$AsteroidTimer.wait_time = 0.4
 	$background.go_normal()
 	asteroid_type = ""
-	scroll_mult = 1.0
+	scroll_target = 4
+	$SpeedRampTimer.start()
 
 
 func _on_player_go_fast():
-	print_debug("Asteroids going fast.")
-	scroll_mult = 2.0
+	#print_debug("Asteroids going fast.")
+	scroll_target = 8
+	$SpeedRampTimer.start()
 	$background.go_fast()
 
 
 func _on_player_go_rainbow():
-	print_debug("Making rainbow asteroids and stars.")
+	#print_debug("Making rainbow asteroids and stars.")
 	asteroid_type = "rainbow"
-	scroll_mult = 4.0
-	$AsteroidTimer.wait_time = 0.1
+	scroll_target = 16
+	$SpeedRampTimer.start()
+	#$AsteroidTimer.wait_time = 0.1
 	$background.go_rainbow()
+
+
+func _on_speed_ramp_timer_timeout():
+	print_debug(scroll_speed)
+	if scroll_speed < 4:
+		scroll_speed = 4
+		scroll_target = 4
+		$Player.cust_grav = 250
+		$SpeedRampTimer.stop()
+		
+	elif scroll_target > 4:
+		scroll_speed = scroll_speed + 1
+		$Player.cust_grav += 25
+	else:
+		scroll_speed = scroll_speed -2
+		$Player.cust_grav -= 50
+	
+	if scroll_target == scroll_speed:
+		$SpeedRampTimer.stop()
+		print_debug("stopped")
+	

@@ -11,13 +11,13 @@ func _process(_delta):
 
 func break_apart():
 	# TODO: Start some cool explosion or something
-	print_debug("Asteroid die.")
+	#print_debug("Asteroid die.")
 	queue_free()
 
 
 func become_coin():
 	# TODO: Start some cool coin collection animation or something
-	print_debug("Asteroid coin.")
+	#print_debug("Asteroid coin.")
 	# TODO: Score should increment same as coin
 	queue_free()
 
