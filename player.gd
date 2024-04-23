@@ -62,11 +62,13 @@ func start():
 
 func die():
 	alive = false
+	sfx.stop()
 	send_normal_signals()
 	powerUpState = ""
 	powerUpTimer.stop()
-	death.emit()
 	cust_grav = 250
+	death.emit()
+	
 
 
 func send_normal_signals():
