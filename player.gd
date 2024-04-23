@@ -8,6 +8,7 @@ signal go_rainbow
 
 @onready var spaceship = $Spaceship
 @onready var sfx = $thruster
+@onready var dieSound = $DeathNoise
 @onready var powerUpTimer = $PowerUpTimer
 @export var cust_grav = 250
 @export var rotateSpeed = 90
@@ -63,6 +64,7 @@ func start():
 func die():
 	alive = false
 	sfx.stop()
+	dieSound.play()
 	send_normal_signals()
 	powerUpState = ""
 	powerUpTimer.stop()
