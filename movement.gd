@@ -155,6 +155,8 @@ func _on_player_make_gold():
 
 
 func _on_player_return_normal():
+	$Player/MiscAudio.playing = false
+	$"BGM-Generic".stream_paused = false
 	$"BGM-Generic".pitch_scale = 1
 	$ObstacleTimer.wait_time = 0.4
 	$background.go_normal()
@@ -164,6 +166,7 @@ func _on_player_return_normal():
 
 
 func _on_player_go_fast():
+	$Player/MiscAudio.playing = false
 	$"BGM-Generic".pitch_scale = 1.1 
 	$SpeedRampTimer.stop()
 	scroll_speed = 8
@@ -173,6 +176,7 @@ func _on_player_go_fast():
 
 func _on_player_go_rainbow():
 	$SpeedRampTimer.stop()
+	$"BGM-Generic".stream_paused = true
 	asteroid_type = "rainbow"
 	scroll_speed = 16
 	$Player.cust_grav = 550
