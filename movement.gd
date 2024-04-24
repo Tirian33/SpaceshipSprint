@@ -101,6 +101,7 @@ func _on_player_make_gold():
 
 
 func _on_player_return_normal():
+	$"BGM-Generic".pitch_scale = 1
 	$AsteroidTimer.wait_time = 0.4
 	$background.go_normal()
 	asteroid_type = ""
@@ -109,6 +110,7 @@ func _on_player_return_normal():
 
 
 func _on_player_go_fast():
+	$"BGM-Generic".pitch_scale = 1.1 
 	$SpeedRampTimer.stop()
 	scroll_speed = 8
 	$Player.cust_grav = 350

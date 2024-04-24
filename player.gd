@@ -8,7 +8,7 @@ signal go_rainbow
 
 @onready var spaceship = $Spaceship
 @onready var sfx = $thruster
-@onready var dieSound = $DeathNoise
+@onready var altSFX = $MiscAudio
 @onready var powerUpTimer = $PowerUpTimer
 @export var cust_grav = 250
 @export var rotateSpeed = 90
@@ -64,7 +64,9 @@ func start():
 func die():
 	alive = false
 	sfx.stop()
-	dieSound.play()
+	altSFX.stop()
+	altSFX.stream = load("res://audio/death.tres")
+	altSFX.play()
 	send_normal_signals()
 	powerUpState = ""
 	powerUpTimer.stop()
@@ -87,7 +89,8 @@ func _input(event):
 		powerUpState = "shield"
 
 		send_normal_signals()
-
+		altSFX.stream = load("res://audio/Shield.tres")
+		altSFX.play()
 		powerUpTimer.start(powerUpDuration)
 
 	if event.is_action_pressed("midas"):
@@ -100,7 +103,8 @@ func _input(event):
 		get_tree().call_group("asteroids", "become_gold")
 		# Signal asteroid generate to generate gold asteroids
 		make_gold.emit()
-
+		altSFX.stream = load("res://audio/midas.tres")
+		altSFX.play()
 		powerUpTimer.start(powerUpDuration)
 
 	if event.is_action_pressed("fast"):
@@ -121,7 +125,8 @@ func _input(event):
 		get_tree().call_group("asteroids", "become_rainbow")
 		# Signal asteroid generate to generate rainbow asteroids
 		go_rainbow.emit()
-
+		altSFX.stream = load("res://audio/RGB.tres")
+		altSFX.play()
 		powerUpTimer.start(powerUpDuration)
 
 
