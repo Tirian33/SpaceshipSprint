@@ -8,8 +8,8 @@ func _on_start_button_pressed():
 
 
 func _on_shop_button_pressed():
-	print("Shop not implemented yet")
-	pass
+	$Shop.get_node("ShopAnimation").play("RESET")
+	$Shop.get_node("ShopAnimation").play("TransIn")
 
 
 func _on_quit_button_pressed():

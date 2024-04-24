@@ -8,7 +8,7 @@
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -65,6 +65,8 @@ corner_radius_bottom_left = 32
 
 [node name="Shop" type="CanvasLayer"]
 process_mode = 3
+offset = Vector2(0, -1000)
+transform = Transform2D(1, 0, 0, 1, 0, -1000)
 script = ExtResource("1_iyjo4")
 
 [node name="ShopAnimation" type="AnimationPlayer" parent="."]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://did4rhqqoqggd"]
+[gd_scene load_steps=4 format=3 uid="uid://did4rhqqoqggd"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_6dsx7"]
 [ext_resource type="Texture2D" uid="uid://ryaxynvf5sem" path="res://images/MainMenuArt.jpg" id="2_hgxwe"]
+[ext_resource type="PackedScene" uid="uid://b8w886bojhjsa" path="res://Shop/shop.tscn" id="3_vlwes"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_6dsx7")
@@ -34,6 +35,8 @@ offset_right = 689.0
 offset_bottom = 507.0
 text = "Quit
 "
+
+[node name="Shop" parent="." instance=ExtResource("3_vlwes")]
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]

@@ -19,6 +19,10 @@ func _ready():
 	$Panel/VBoxContainer/ItemCost.text = "$" + str(cost)
 	$Panel/VBoxContainer/ItemImg.texture = ResourceLoader.load(item["Image"])
 	
+	if type == "Skin":
+		$Panel.self_modulate = Color(0.502, 0.78, 0.69)
+		button.self_modulate = Color(0.502, 0.78, 0.69)
+	
 	if status == 0:
 		button.text = "Purchase"
 	if status == 1:
@@ -36,7 +40,6 @@ func save_update():
 	Global.item_list[item_key]["Status"] = status
 	Global.item_list["Gold"] = Global.gold
 	Global.write_save(Global.item_list)
-	Global.item_list = Global.read_save()
 
 func _on_button_pressed():
 	if status == 0 and Global.gold >= cost:
