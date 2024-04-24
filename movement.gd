@@ -25,6 +25,7 @@ func _ready():
 
 
 func new_game():
+	random.randomize()
 	$"BGM-Generic".play()
 	$Player.start()
 	is_game_running = true
@@ -32,6 +33,7 @@ func new_game():
 	obstacles.clear()
 	generate_obstacles()
 	$ObstacleTimer.start()
+	$PowerupSpawnTimer.start()
 
 
 func _process(_delta):
@@ -59,14 +61,17 @@ func _on_asteroid_timer_timeout():
 
 
 func generate_obstacles():
-	random.randomize()
+	
 	var chance : int = random.randi_range(0, 10)
-	if chance >= 3:
+	if chance >= 5:
 		generate_asteroid()
-	elif chance == 0 or chance == 1:
+	elif chance == 0:
 		generate_coin()
-	elif chance == 2:
-		generate_powerup()
+	else:
+		generate_coin(generate_asteroid())
+		
+
+
 
 
 func generate_asteroid():
@@ -85,19 +90,39 @@ func generate_asteroid():
 
 	add_child(asteroid)
 	obstacles.append(asteroid)
-
-
-func generate_coin():
-	var coin : Area2D = coin_scene.instantiate()
-	coin.position.x = screen_size.x + OBSTACLE_DELAY
-	coin.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
 	
-	add_child(coin)
-	obstacles.append(coin)
+	return asteroid.position.y
+
+
+func generate_coin(not_here: int = -31):
+	
+	var attemptedY = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
+	
+	#Only generate the coin if it is not in an obstacle
+	if abs(not_here - attemptedY) > 30:
+		var coin : Area2D = coin_scene.instantiate()
+		coin.position.x = screen_size.x + OBSTACLE_DELAY
+		coin.position.y = attemptedY
+		add_child(coin)
+		obstacles.append(coin)
 
 
 func generate_powerup():
 	var powerup : Area2D = powerup_placeholder.instantiate()
+	#TODO: Add link to shop unlocks; if powerup not unlocked it doesn't spawn
+	
+	print_debug("POWERUP GENERATED")
+	var chance : int = random.randi_range(0, 16)
+	if chance <= 1:
+		powerup.set_meta("effectID", 3)
+	elif chance <=6:
+		powerup.set_meta("effectID", 0)
+	elif chance <=11:
+		powerup.set_meta("effectID", 1)
+	else:
+		powerup.set_meta("effectID", 2)
+		
+	
 	powerup.position.x = screen_size.x + OBSTACLE_DELAY
 	powerup.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
 	

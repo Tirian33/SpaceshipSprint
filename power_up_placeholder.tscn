@@ -6,6 +6,11 @@
 radius = 32.0156
 
 [node name="PowerUpPlaceholder" type="Area2D" groups=["powerup"]]
+editor_description = "0 = Shield
+1 = Midas
+2 = 2x speed
+3 = RGB"
+metadata/effectID = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qw7mc")

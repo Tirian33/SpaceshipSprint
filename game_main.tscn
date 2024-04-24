@@ -51,6 +51,9 @@ script = ExtResource("6_1jfmi")
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 0.4
 
+[node name="PowerupSpawnTimer" type="Timer" parent="."]
+wait_time = 40.0
+
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
 visible = false
 
@@ -65,5 +68,6 @@ wait_time = 0.25
 [connection signal="pressed" from="Player/Pause Active Node/Continue Button" to="Player/Pause Active Node/Continue Button" method="_on_pressed"]
 [connection signal="pressed" from="Player/Pause Active Node/Menu Button" to="Player/Pause Active Node/Menu Button" method="_on_pressed"]
 [connection signal="timeout" from="ObstacleTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="timeout" from="PowerupSpawnTimer" to="." method="generate_powerup"]
 [connection signal="new_run" from="LoseScreen" to="." method="new_game"]
 [connection signal="timeout" from="SpeedRampTimer" to="." method="_on_speed_ramp_timer_timeout"]

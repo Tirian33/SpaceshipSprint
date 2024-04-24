@@ -14,6 +14,7 @@ signal go_rainbow
 @export var rotateSpeed = 90
 @export var powerUpState = ""
 @export var powerUpDuration = 15
+@export var coins = 0
 
 var spaceshipDown = deg_to_rad(120)
 var spaceshipUp = deg_to_rad(60)
@@ -56,6 +57,7 @@ func _process(delta):
 
 func start():
 	print_debug("RESTART")
+	coins = 0
 	position.x = 75
 	position.y = 324 #75, 324
 	alive = true
@@ -86,66 +88,87 @@ func send_normal_signals():
 func _input(event):
 	if event.is_action_pressed("shield"):
 		print_debug("shield")
-		powerUpState = "shield"
-
-		send_normal_signals()
-		altSFX.stream = load("res://audio/Shield.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
+		power_shield()
 
 	if event.is_action_pressed("midas"):
 		print_debug("midas")
-		powerUpState = "midas"
-
 		send_normal_signals()
-
-		# Signal existing asteroids to become gold
-		get_tree().call_group("asteroids", "become_gold")
-		# Signal asteroid generate to generate gold asteroids
-		make_gold.emit()
-		altSFX.stream = load("res://audio/midas.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
+		power_midas()
 
 	if event.is_action_pressed("fast"):
 		print_debug("fast")
-		powerUpState = "fast"
-
 		send_normal_signals()
-		go_fast.emit()
-
-		powerUpTimer.start(powerUpDuration)
+		power_fast()
 
 	if event.is_action_pressed("rainbow"):
 		print_debug("rainbow")
-		powerUpState = "rainbow"
-
 		send_normal_signals()
-		# Signal existing asteroids to become rainbow
-		get_tree().call_group("asteroids", "become_rainbow")
-		# Signal asteroid generate to generate rainbow asteroids
-		go_rainbow.emit()
-		altSFX.stream = load("res://audio/RGB.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
+		power_rgb()
 
+
+func power_shield():
+	powerUpState = "shield"
+	send_normal_signals()
+	altSFX.stream = load("res://audio/Shield.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
+	
+func power_midas():
+	powerUpState = "midas"
+	# Signal existing asteroids to become gold
+	get_tree().call_group("asteroids", "become_gold")
+	# Signal asteroid generate to generate gold asteroids
+	make_gold.emit()
+	altSFX.stream = load("res://audio/midas.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
+	
+func power_fast():
+	powerUpState = "fast"
+	go_fast.emit()
+	powerUpTimer.start(powerUpDuration)
+
+func power_rgb():
+	powerUpState = "rainbow"
+	# Signal existing asteroids to become rainbow
+	get_tree().call_group("asteroids", "become_rainbow")
+	# Signal asteroid generate to generate rainbow asteroids
+	go_rainbow.emit()
+	altSFX.stream = load("res://audio/RGB.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
 
 func _on_area_entered_player(area):
-	if powerUpState == "shield":
+	if area.is_in_group("coins"):
+		if is_instance_valid(area):
+			area.queue_free()
+			coins +=1
+			# increment play gold by 1
+			print("Player has " + str(coins) + " gold!")
+	elif area.is_in_group("powerup"):
+		if is_instance_valid(area):
+			match area.get_meta("effectID"):
+				0:
+					power_shield()
+				1:
+					power_midas()
+				2:
+					power_fast()
+				3:
+					power_rgb()
+				_:
+					print_debug("Powerup not recognized")
+				
+			area.queue_free()
+			print("Activated powerup!")
+	elif powerUpState == "shield":
 		area.break_apart()
 	elif powerUpState == "midas":
 		area.become_coin()
+		coins += 2
 	elif powerUpState == "rainbow":
 		area.become_coin()
-	elif area.is_in_group("coins"):
-		if is_instance_valid(area):
-			area.queue_free()
-			# increment play gold by 1
-			print("Player earned 1 gold!")
-	elif area.is_in_group("powerup"):
-		if is_instance_valid(area):
-			area.queue_free()
-			print("Activated powerup!")
+		coins += 1
 	else:
 		die()
 
