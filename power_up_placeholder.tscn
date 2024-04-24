@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhgqgx42vn80v"]
+
+[ext_resource type="Texture2D" uid="uid://r87py12x0n0i" path="res://images/obstacles/white_circle.png" id="1_qw7mc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ssw8o"]
+radius = 32.0156
+
+[node name="PowerUpPlaceholder" type="Area2D" groups=["powerup"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qw7mc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ssw8o")

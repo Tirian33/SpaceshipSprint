@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://ekqa6157ulqd"]
+
+[ext_resource type="Texture2D" uid="uid://bgx1088pq37g" path="res://images/LoseScreen.jpg" id="1_jdhrx"]
+[ext_resource type="Script" path="res://lose_screen.gd" id="2_pek7y"]
+
+[node name="LoseScreen" type="Sprite2D"]
+position = Vector2(576, 324)
+scale = Vector2(1.64571, 1.81006)
+texture = ExtResource("1_jdhrx")
+script = ExtResource("2_pek7y")
+
+[node name="AgainButton" type="Button" parent="."]
+offset_left = -59.0
+offset_top = -27.0
+offset_right = 77.0
+offset_bottom = 13.0
+text = "Play Again"
+
+[node name="MenuButton" type="Button" parent="."]
+offset_left = -59.0
+offset_top = 25.0
+offset_right = 77.0
+offset_bottom = 65.0
+text = "Main Menu"
+
+[connection signal="pressed" from="AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

@@ -238,7 +238,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_p1jeb"]
 radius = 34.0
 
-[node name="Asteroid" type="Area2D"]
+[node name="Asteroid" type="Area2D" groups=["asteroids"]]
 script = ExtResource("1_5htpd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -246,5 +246,3 @@ sprite_frames = SubResource("SpriteFrames_12pem")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p1jeb")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
