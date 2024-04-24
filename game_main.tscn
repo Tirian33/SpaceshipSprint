@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b50od5lyfon12" path="res://coin.tscn" id="2_atrph"]
 [ext_resource type="AudioStream" uid="uid://by1tvvu40li7r" path="res://audio/BGM-Game.tres" id="3_8b60g"]
 [ext_resource type="PackedScene" uid="uid://chyyxojx7m5sk" path="res://player.tscn" id="3_vyhpb"]
-[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://power_up_placeholder.tscn" id="4_idq8w"]
+[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://powerUpHandler.tscn" id="4_0227j"]
 [ext_resource type="Script" path="res://Continue Button.gd" id="5_hltyd"]
 [ext_resource type="Script" path="res://Menu Button.gd" id="6_1jfmi"]
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]
@@ -16,7 +16,7 @@ editor_description = "Game running modules like the pause menu, UI, player, obst
 script = ExtResource("1_lqokm")
 asteroid_scene = ExtResource("2_8iddf")
 coin_scene = ExtResource("2_atrph")
-powerup_placeholder = ExtResource("4_idq8w")
+powerup_placeholder = ExtResource("4_0227j")
 
 [node name="BGM-Generic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8b60g")
