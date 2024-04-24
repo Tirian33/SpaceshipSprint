@@ -61,11 +61,11 @@ func _on_asteroid_timer_timeout():
 func generate_obstacles():
 	random.randomize()
 	var chance : int = random.randi_range(0, 10)
-	if chance > 3:
+	if chance >= 3:
 		generate_asteroid()
 	elif chance == 0 or chance == 1:
 		generate_coin()
-	elif chance == 2 or chance == 3:
+	elif chance == 2:
 		generate_powerup()
 
 
