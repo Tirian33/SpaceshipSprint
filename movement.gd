@@ -69,9 +69,6 @@ func generate_obstacles():
 		generate_coin()
 	else:
 		generate_coin(generate_asteroid())
-		
-
-
 
 
 func generate_asteroid():
@@ -155,7 +152,6 @@ func _on_player_make_gold():
 
 
 func _on_player_return_normal():
-	$Player/MiscAudio.playing = false
 	$"BGM-Generic".stream_paused = false
 	$"BGM-Generic".pitch_scale = 1
 	$ObstacleTimer.wait_time = 0.4
