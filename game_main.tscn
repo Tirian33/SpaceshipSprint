@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4r6hlg68k1xv"]
+[gd_scene load_steps=11 format=3 uid="uid://b4r6hlg68k1xv"]
 
 [ext_resource type="Script" path="res://movement.gd" id="1_lqokm"]
 [ext_resource type="PackedScene" uid="uid://dq0p1by0vqkb7" path="res://Starfield-background.tscn" id="1_vvpd2"]
 [ext_resource type="PackedScene" uid="uid://xbjumey62l0t" path="res://asteroid.tscn" id="2_8iddf"]
+[ext_resource type="PackedScene" uid="uid://b50od5lyfon12" path="res://coin.tscn" id="2_atrph"]
 [ext_resource type="AudioStream" uid="uid://by1tvvu40li7r" path="res://audio/BGM-Game.tres" id="3_8b60g"]
 [ext_resource type="PackedScene" uid="uid://chyyxojx7m5sk" path="res://player.tscn" id="3_vyhpb"]
+[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://power_up_placeholder.tscn" id="4_idq8w"]
 [ext_resource type="Script" path="res://Continue Button.gd" id="5_hltyd"]
 [ext_resource type="Script" path="res://Menu Button.gd" id="6_1jfmi"]
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]
@@ -13,6 +15,8 @@
 editor_description = "Game running modules like the pause menu, UI, player, obstacle field."
 script = ExtResource("1_lqokm")
 asteroid_scene = ExtResource("2_8iddf")
+coin_scene = ExtResource("2_atrph")
+powerup_placeholder = ExtResource("4_idq8w")
 
 [node name="BGM-Generic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8b60g")
@@ -44,7 +48,7 @@ text = "Main Menu
 "
 script = ExtResource("6_1jfmi")
 
-[node name="AsteroidTimer" type="Timer" parent="."]
+[node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 0.4
 
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
@@ -60,6 +64,6 @@ wait_time = 0.25
 [connection signal="return_normal" from="Player" to="." method="_on_player_return_normal"]
 [connection signal="pressed" from="Player/Pause Active Node/Continue Button" to="Player/Pause Active Node/Continue Button" method="_on_pressed"]
 [connection signal="pressed" from="Player/Pause Active Node/Menu Button" to="Player/Pause Active Node/Menu Button" method="_on_pressed"]
-[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="timeout" from="ObstacleTimer" to="." method="_on_asteroid_timer_timeout"]
 [connection signal="new_run" from="LoseScreen" to="." method="new_game"]
 [connection signal="timeout" from="SpeedRampTimer" to="." method="_on_speed_ramp_timer_timeout"]

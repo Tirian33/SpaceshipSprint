@@ -137,6 +137,15 @@ func _on_area_entered_player(area):
 		area.become_coin()
 	elif powerUpState == "rainbow":
 		area.become_coin()
+	elif area.is_in_group("coins"):
+		if is_instance_valid(area):
+			area.queue_free()
+			# increment play gold by 1
+			print("Player earned 1 gold!")
+	elif area.is_in_group("powerup"):
+		if is_instance_valid(area):
+			area.queue_free()
+			print("Activated powerup!")
 	else:
 		die()
 

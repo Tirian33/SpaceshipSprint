@@ -1,18 +1,21 @@
 extends Node
 
+@export var asteroid_scene : PackedScene
+@export var coin_scene : PackedScene
+@export var powerup_placeholder : PackedScene
+
 var is_game_running: bool
 var random = RandomNumberGenerator.new()
+var obstacles : Array
 
-# Asteroid Settings
-@export var asteroid_scene : PackedScene
+# Obstacle Settings
 var asteroid_type = ""
 var screen_size : Vector2
-var asteroids : Array
 var scroll : int
 var scroll_normal : int = 4
 var scroll_speed : int = scroll_normal
-const ASTEROID_DELAY : int = 100
-const ASTEROID_RANGE : int = 300
+const OBSTACLE_DELAY : int = 100
+const OBSTACLE_RANGE : int = 300
    
 
 func _ready():
@@ -26,25 +29,25 @@ func new_game():
 	$Player.start()
 	is_game_running = true
 	scroll = 0
-	asteroids.clear()
-	generate_asteroids()
-	$AsteroidTimer.start()
+	obstacles.clear()
+	generate_obstacles()
+	$ObstacleTimer.start()
 
 
 func _process(_delta):
 	if not is_game_running:
 		return
 
-	for asteroid in asteroids:
-		if is_instance_valid(asteroid):
-			asteroid.position.x -= scroll_speed
+	for obstacle in obstacles:
+		if is_instance_valid(obstacle):
+			obstacle.position.x -= scroll_speed
 
 	if scroll_speed != scroll_normal:
 		var tl = $Player/PowerUpTimer.get_time_left()
 		var st = 3.0 if asteroid_type == "rainbow" else 1.5
 
 		if (tl > 0.0 and tl < st) and $SpeedRampTimer.is_stopped():
-			$AsteroidTimer.wait_time = 0.4
+			$ObstacleTimer.wait_time = 0.4
 			$SpeedRampTimer.start()
 
 	if $"Player/Pause Active Node/Continue Button".visible == false:
@@ -52,15 +55,24 @@ func _process(_delta):
 
 
 func _on_asteroid_timer_timeout():
-	generate_asteroids()
+	generate_obstacles()
 
 
-func generate_asteroids():
+func generate_obstacles():
 	random.randomize()
-	
+	var chance : int = random.randi_range(0, 10)
+	if chance > 3:
+		generate_asteroid()
+	elif chance == 0 or chance == 1:
+		generate_coin()
+	elif chance == 2 or chance == 3:
+		generate_powerup()
+
+
+func generate_asteroid():
 	var asteroid : Area2D = asteroid_scene.instantiate()
-	asteroid.position.x = screen_size.x + ASTEROID_DELAY
-	asteroid.position.y = screen_size.y / 2 + random.randi_range(-ASTEROID_RANGE, ASTEROID_RANGE)
+	asteroid.position.x = screen_size.x + OBSTACLE_DELAY
+	asteroid.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
 	
 	# Change asteroid sprite
 	var asteroid_sprite : AnimatedSprite2D = asteroid.get_node("./AnimatedSprite2D")
@@ -72,7 +84,25 @@ func generate_asteroids():
 		asteroid.become_rainbow()
 
 	add_child(asteroid)
-	asteroids.append(asteroid)
+	obstacles.append(asteroid)
+
+
+func generate_coin():
+	var coin : Area2D = coin_scene.instantiate()
+	coin.position.x = screen_size.x + OBSTACLE_DELAY
+	coin.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
+	
+	add_child(coin)
+	obstacles.append(coin)
+
+
+func generate_powerup():
+	var powerup : Area2D = powerup_placeholder.instantiate()
+	powerup.position.x = screen_size.x + OBSTACLE_DELAY
+	powerup.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
+	
+	add_child(powerup)
+	obstacles.append(powerup)
 
 
 func _input(event):
@@ -84,16 +114,15 @@ func _input(event):
 
 func _on_player_death():
 	is_game_running = false
-	$AsteroidTimer.stop()
+	$ObstacleTimer.stop()
 	$"BGM-Generic".stop()
 	$SpeedRampTimer.stop()
-	for asteroid in asteroids:
-		if is_instance_valid(asteroid):
-			asteroid.queue_free()
-	asteroids.clear()
+	for obstacle in obstacles:
+		if is_instance_valid(obstacle):
+			obstacle.queue_free()
+	obstacles.clear()
 	scroll_speed = 4
 	$"LoseScreen".show()
-	pass # Replace with function body.
 
 
 func _on_player_make_gold():
@@ -102,7 +131,7 @@ func _on_player_make_gold():
 
 func _on_player_return_normal():
 	$"BGM-Generic".pitch_scale = 1
-	$AsteroidTimer.wait_time = 0.4
+	$ObstacleTimer.wait_time = 0.4
 	$background.go_normal()
 	asteroid_type = ""
 	if scroll_speed != scroll_normal:
@@ -122,7 +151,7 @@ func _on_player_go_rainbow():
 	asteroid_type = "rainbow"
 	scroll_speed = 16
 	$Player.cust_grav = 550
-	$AsteroidTimer.wait_time = 0.1
+	$ObstacleTimer.wait_time = 0.1
 	$background.go_rainbow()
 
 
