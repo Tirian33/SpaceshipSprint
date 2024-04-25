@@ -80,6 +80,7 @@ func die():
 
 
 func send_normal_signals():
+	$Shield.visible = false
 	# Signal existing asteroids to become normal
 	get_tree().call_group("asteroids", "become_normal")
 	# Signal asteroid generate to generate normal asteroids at normal speed
@@ -89,6 +90,7 @@ func send_normal_signals():
 func power_shield():
 	powerUpState = "shield"
 	send_normal_signals()
+	$Shield.visible = true
 	altSFX.stream = load("res://audio/Shield.tres")
 	altSFX.play()
 	powerUpTimer.start(powerUpDuration)

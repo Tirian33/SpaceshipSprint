@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chyyxojx7m5sk"]
+[gd_scene load_steps=11 format=3 uid="uid://chyyxojx7m5sk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_6kyja"]
 [ext_resource type="Texture2D" uid="uid://rv7gi55qe7ld" path="res://images/rocket-1-off.png" id="2_npvkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d0y4hx2uajddb" path="res://images/rocket-1-on/rocket-2-on.png" id="4_h3qp5"]
 [ext_resource type="Texture2D" uid="uid://bxet2cpo7sfvk" path="res://images/rocket-1-on/rocket-3-on.png" id="5_akkwx"]
 [ext_resource type="AudioStream" uid="uid://xgxs6dlkh5bs" path="res://audio/Shield.tres" id="6_y3yxy"]
+[ext_resource type="Texture2D" uid="uid://cfxwbscg0xge5" path="res://images/basic-shield.png" id="7_wenru"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8r4hr"]
 radius = 84.0
@@ -65,6 +66,12 @@ stream = ExtResource("6_y3yxy")
 [node name="PowerUpTimer" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
+
+[node name="Shield" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7.96398e-05, -22)
+rotation = -1.5708
+texture = ExtResource("7_wenru")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered_player"]
 [connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
