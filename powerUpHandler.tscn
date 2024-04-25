@@ -1,0 +1,78 @@
+[gd_scene load_steps=16 format=3 uid="uid://bhgqgx42vn80v"]
+
+[ext_resource type="Texture2D" uid="uid://csciv6v6os3hj" path="res://images/powerup/wheeling-2.png" id="1_ps5dl"]
+[ext_resource type="Script" path="res://powerup.gd" id="1_sl0ir"]
+[ext_resource type="Texture2D" uid="uid://blxxlnyf6o80f" path="res://images/powerup/wheeling-3.png" id="2_0x24n"]
+[ext_resource type="Texture2D" uid="uid://b2opdlmm3gf18" path="res://images/powerup/wheeling-4.png" id="3_rwkky"]
+[ext_resource type="Texture2D" uid="uid://derju8bdu71sq" path="res://images/powerup/wheeling-5.png" id="4_c8b1n"]
+[ext_resource type="Texture2D" uid="uid://owlxy527anfo" path="res://images/powerup/wheeling-6.png" id="5_glmch"]
+[ext_resource type="Texture2D" uid="uid://c44fvl5gnu0kv" path="res://images/powerup/wheeling-7.png" id="6_inrpa"]
+[ext_resource type="Texture2D" uid="uid://dgy3rmwdqevuu" path="res://images/powerup/wheeling-9.png" id="7_kxjm0"]
+[ext_resource type="Texture2D" uid="uid://2pd5gpowt7y7" path="res://images/powerup/wheeling-10.png" id="8_hjae2"]
+[ext_resource type="Texture2D" uid="uid://dwuwwn7ewncl2" path="res://images/powerup/wheeling-11.png" id="9_dlmax"]
+[ext_resource type="Texture2D" uid="uid://bod4nyw6x1enb" path="res://images/powerup/wheeling-12.png" id="10_3ixur"]
+[ext_resource type="Texture2D" uid="uid://bs1g2sek3v1or" path="res://images/powerup/wheeling-13.png" id="11_b8clx"]
+[ext_resource type="Texture2D" uid="uid://bv7n485ip4mic" path="res://images/powerup/wheeling-14.png" id="12_7sd4k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htk61"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ps5dl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0x24n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rwkky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c8b1n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_glmch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_inrpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kxjm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hjae2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dlmax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3ixur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b8clx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7sd4k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ssw8o"]
+radius = 32.0156
+
+[node name="PowerUpHandler" type="Area2D" groups=["powerup"]]
+editor_description = "0 = Shield
+1 = Midas
+2 = 2x speed
+3 = RGB"
+script = ExtResource("1_sl0ir")
+metadata/effectID = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_htk61")
+frame_progress = 0.754292
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ssw8o")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4r6hlg68k1xv"]
+[gd_scene load_steps=13 format=3 uid="uid://b4r6hlg68k1xv"]
 
 [ext_resource type="Script" path="res://movement.gd" id="1_lqokm"]
 [ext_resource type="PackedScene" uid="uid://dq0p1by0vqkb7" path="res://Starfield-background.tscn" id="1_vvpd2"]
@@ -6,17 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://b50od5lyfon12" path="res://coin.tscn" id="2_atrph"]
 [ext_resource type="AudioStream" uid="uid://by1tvvu40li7r" path="res://audio/BGM-Game.tres" id="3_8b60g"]
 [ext_resource type="PackedScene" uid="uid://chyyxojx7m5sk" path="res://player.tscn" id="3_vyhpb"]
-[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://power_up_placeholder.tscn" id="4_idq8w"]
+[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://powerUpHandler.tscn" id="4_0227j"]
 [ext_resource type="Script" path="res://Continue Button.gd" id="5_hltyd"]
 [ext_resource type="Script" path="res://Menu Button.gd" id="6_1jfmi"]
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]
+[ext_resource type="Script" path="res://DistanceLabel.gd" id="11_rgntk"]
+[ext_resource type="Script" path="res://Coin Label.gd" id="12_2q63p"]
 
 [node name="Game-main" type="Node"]
 editor_description = "Game running modules like the pause menu, UI, player, obstacle field."
 script = ExtResource("1_lqokm")
 asteroid_scene = ExtResource("2_8iddf")
 coin_scene = ExtResource("2_atrph")
-powerup_placeholder = ExtResource("4_idq8w")
+powerup_placeholder = ExtResource("4_0227j")
 
 [node name="BGM-Generic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8b60g")
@@ -31,6 +33,7 @@ process_mode = 2
 
 [node name="Continue Button" type="Button" parent="Player/Pause Active Node"]
 visible = false
+self_modulate = Color(0, 1, 1, 1)
 offset_left = 421.0
 offset_top = 157.0
 offset_right = 676.0
@@ -40,6 +43,7 @@ script = ExtResource("5_hltyd")
 
 [node name="Menu Button" type="Button" parent="Player/Pause Active Node"]
 visible = false
+self_modulate = Color(0, 1, 1, 1)
 offset_left = 421.0
 offset_top = 270.0
 offset_right = 676.0
@@ -51,19 +55,43 @@ script = ExtResource("6_1jfmi")
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 0.4
 
+[node name="PowerupSpawnTimer" type="Timer" parent="."]
+wait_time = 40.0
+
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
 visible = false
 
 [node name="SpeedRampTimer" type="Timer" parent="."]
 wait_time = 0.25
 
+[node name="DistanceLabel" type="Label" parent="."]
+offset_left = 246.0
+offset_top = 3.0
+offset_right = 437.0
+offset_bottom = 69.0
+script = ExtResource("11_rgntk")
+
+[node name="Coin Label" type="Label" parent="."]
+offset_left = 486.0
+offset_top = 1.0
+offset_right = 677.0
+offset_bottom = 67.0
+script = ExtResource("12_2q63p")
+
+[node name="DistanceTimer" type="Timer" parent="."]
+
+[connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
+[connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="go_fast" from="Player" to="." method="_on_player_go_fast"]
 [connection signal="go_rainbow" from="Player" to="." method="_on_player_go_rainbow"]
 [connection signal="make_gold" from="Player" to="." method="_on_player_make_gold"]
+[connection signal="pluscoin" from="Player" to="Coin Label" method="_on_player_pluscoin"]
 [connection signal="return_normal" from="Player" to="." method="_on_player_return_normal"]
 [connection signal="pressed" from="Player/Pause Active Node/Continue Button" to="Player/Pause Active Node/Continue Button" method="_on_pressed"]
 [connection signal="pressed" from="Player/Pause Active Node/Menu Button" to="Player/Pause Active Node/Menu Button" method="_on_pressed"]
 [connection signal="timeout" from="ObstacleTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="timeout" from="PowerupSpawnTimer" to="." method="generate_powerup"]
 [connection signal="new_run" from="LoseScreen" to="." method="new_game"]
 [connection signal="timeout" from="SpeedRampTimer" to="." method="_on_speed_ramp_timer_timeout"]
+[connection signal="timeout" from="DistanceTimer" to="DistanceLabel" method="_on_distance_timer_timeout"]

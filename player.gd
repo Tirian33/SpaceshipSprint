@@ -20,6 +20,8 @@ var spaceshipUp = deg_to_rad(60)
 var playing_sound = false
 var alive = true
 
+signal pluscoin
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,30 +30,32 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if alive:
-		if Input.is_action_pressed("move"):
-			spaceship.animation = "on"
-			if rotation >= spaceshipUp:
-				rotation -= deg_to_rad(rotateSpeed) * delta
-			
-			if not playing_sound:
-				sfx.play()
-				playing_sound = true
-			
-		else:
-			spaceship.animation = "off"
-			if rotation <= spaceshipDown:
-				rotation += deg_to_rad(rotateSpeed) * delta
-			
-			if playing_sound:
-				sfx.stop()
-				playing_sound = false
+	if not alive:
+		return
 
-		var pointing = ((rad_to_deg(rotation) - 90) / 30)
-		position += Vector2.DOWN * cust_grav * delta * pointing
+	if Input.is_action_pressed("move"):
+		spaceship.animation = "on"
+		if rotation >= spaceshipUp:
+			rotation -= deg_to_rad(rotateSpeed) * delta
 		
-		if position.y < -1 or position.y > 649:
-			die()
+		if not playing_sound:
+			sfx.play()
+			playing_sound = true
+		
+	else:
+		spaceship.animation = "off"
+		if rotation <= spaceshipDown:
+			rotation += deg_to_rad(rotateSpeed) * delta
+		
+		if playing_sound:
+			sfx.stop()
+			playing_sound = false
+
+	var pointing = ((rad_to_deg(rotation) - 90) / 30)
+	position += Vector2.DOWN * cust_grav * delta * pointing
+	
+	if position.y < -1 or position.y > 649:
+		die()
 
 
 func start():
@@ -65,7 +69,7 @@ func die():
 	alive = false
 	sfx.stop()
 	altSFX.stop()
-	altSFX.stream = load("res://audio/death.tres")
+	altSFX.stream = preload("res://audio/death.tres")
 	altSFX.play()
 	send_normal_signals()
 	powerUpState = ""
@@ -82,70 +86,73 @@ func send_normal_signals():
 	return_normal.emit()
 
 
-# TODO: Change to separate functions that activate on appropriate power up collision
-func _input(event):
-	if event.is_action_pressed("shield"):
-		print_debug("shield")
-		powerUpState = "shield"
+func power_shield():
+	powerUpState = "shield"
+	send_normal_signals()
+	altSFX.stream = load("res://audio/Shield.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
 
-		send_normal_signals()
-		altSFX.stream = load("res://audio/Shield.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
+	
+func power_midas():
+	powerUpState = "midas"
+	# Signal existing asteroids to become gold
+	get_tree().call_group("asteroids", "become_gold")
+	# Signal asteroid generate to generate gold asteroids
+	make_gold.emit()
+	altSFX.stream = load("res://audio/midas.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
 
-	if event.is_action_pressed("midas"):
-		print_debug("midas")
-		powerUpState = "midas"
+	
+func power_fast():
+	powerUpState = "fast"
+	go_fast.emit()
+	powerUpTimer.start(powerUpDuration)
 
-		send_normal_signals()
 
-		# Signal existing asteroids to become gold
-		get_tree().call_group("asteroids", "become_gold")
-		# Signal asteroid generate to generate gold asteroids
-		make_gold.emit()
-		altSFX.stream = load("res://audio/midas.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
-
-	if event.is_action_pressed("fast"):
-		print_debug("fast")
-		powerUpState = "fast"
-
-		send_normal_signals()
-		go_fast.emit()
-
-		powerUpTimer.start(powerUpDuration)
-
-	if event.is_action_pressed("rainbow"):
-		print_debug("rainbow")
-		powerUpState = "rainbow"
-
-		send_normal_signals()
-		# Signal existing asteroids to become rainbow
-		get_tree().call_group("asteroids", "become_rainbow")
-		# Signal asteroid generate to generate rainbow asteroids
-		go_rainbow.emit()
-		altSFX.stream = load("res://audio/RGB.tres")
-		altSFX.play()
-		powerUpTimer.start(powerUpDuration)
-
+func power_rgb():
+	powerUpState = "rainbow"
+	# Signal existing asteroids to become rainbow
+	get_tree().call_group("asteroids", "become_rainbow")
+	# Signal asteroid generate to generate rainbow asteroids
+	go_rainbow.emit()
+	altSFX.stream = load("res://audio/RGB.tres")
+	altSFX.play()
+	powerUpTimer.start(powerUpDuration)
 
 func _on_area_entered_player(area):
-	if powerUpState == "shield":
+	if not is_instance_valid(area):
+		return
+	
+	if area.is_in_group("coins"):
+		area.queue_free()
+		emit_signal("pluscoin")
+
+	elif area.is_in_group("powerup"):
+		match area.get_meta("effectID"):
+			0:
+				power_shield()
+			1:
+				power_midas()
+			2:
+				power_fast()
+			3:
+				power_rgb()
+			_:
+				print_debug("Powerup not recognized")
+
+		area.queue_free()
+		print("Activated powerup!")
+	elif powerUpState == "shield":
 		area.break_apart()
 	elif powerUpState == "midas":
 		area.become_coin()
+		emit_signal("pluscoin")
+		emit_signal("pluscoin")
 	elif powerUpState == "rainbow":
 		area.become_coin()
-	elif area.is_in_group("coins"):
-		if is_instance_valid(area):
-			area.queue_free()
-			# increment play gold by 1
-			print("Player earned 1 gold!")
-	elif area.is_in_group("powerup"):
-		if is_instance_valid(area):
-			area.queue_free()
-			print("Activated powerup!")
+		emit_signal("pluscoin")
 	else:
 		die()
 

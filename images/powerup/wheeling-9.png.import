@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpcaehsjwi0om"
-path="res://.godot/imported/LoseScreen.jpg-4c45edd9155fb4405ae5520a39b03232.ctex"
+uid="uid://dgy3rmwdqevuu"
+path="res://.godot/imported/wheeling-9.png-3f1f54e160d74dff4657c17dcc96ad2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/LoseScreen.jpg"
-dest_files=["res://.godot/imported/LoseScreen.jpg-4c45edd9155fb4405ae5520a39b03232.ctex"]
+source_file="res://images/powerup/wheeling-9.png"
+dest_files=["res://.godot/imported/wheeling-9.png-3f1f54e160d74dff4657c17dcc96ad2f.ctex"]
 
 [params]
 

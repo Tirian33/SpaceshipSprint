@@ -191,7 +191,9 @@ radius = 33.0151
 [node name="Coin" type="Area2D" groups=["coins"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_doit0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.75, 0.75)
 shape = SubResource("CircleShape2D_gmoew")
