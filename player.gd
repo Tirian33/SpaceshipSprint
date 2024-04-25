@@ -21,6 +21,8 @@ var spaceshipUp = deg_to_rad(60)
 var playing_sound = false
 var alive = true
 
+signal pluscoin
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,6 +132,8 @@ func _on_area_entered_player(area):
 		coins +=1
 		# increment play gold by 1
 		print("Player has " + str(coins) + " gold!")
+		emit_signal("pluscoin")
+		
 	elif area.is_in_group("powerup"):
 		match area.get_meta("effectID"):
 			0:

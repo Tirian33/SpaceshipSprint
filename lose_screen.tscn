@@ -1,27 +1,47 @@
 [gd_scene load_steps=3 format=3 uid="uid://ekqa6157ulqd"]
 
-[ext_resource type="Texture2D" uid="uid://bgx1088pq37g" path="res://images/LoseScreen.jpg" id="1_jdhrx"]
+[ext_resource type="Texture2D" uid="uid://dpcaehsjwi0om" path="res://images/LoseScreen.jpg" id="1_jdhrx"]
 [ext_resource type="Script" path="res://lose_screen.gd" id="2_pek7y"]
 
 [node name="LoseScreen" type="Sprite2D"]
-position = Vector2(576, 324)
-scale = Vector2(1.64571, 1.81006)
+position = Vector2(570, 325)
+scale = Vector2(1.02276, 1.06261)
 texture = ExtResource("1_jdhrx")
 script = ExtResource("2_pek7y")
 
 [node name="AgainButton" type="Button" parent="."]
-offset_left = -59.0
-offset_top = -27.0
-offset_right = 77.0
-offset_bottom = 13.0
+self_modulate = Color(0, 1, 1, 1)
+offset_left = -100.708
+offset_top = -46.1131
+offset_right = 84.2917
+offset_bottom = 13.8869
 text = "Play Again"
 
 [node name="MenuButton" type="Button" parent="."]
-offset_left = -59.0
-offset_top = 25.0
-offset_right = 77.0
-offset_bottom = 65.0
+self_modulate = Color(0, 1, 1, 1)
+offset_left = -99.7306
+offset_top = 43.2898
+offset_right = 87.2694
+offset_bottom = 111.29
 text = "Main Menu"
+
+[node name="YouLabel" type="Label" parent="."]
+offset_left = -337.324
+offset_top = -279.501
+offset_right = 160.676
+offset_bottom = -59.5014
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 140
+text = "You"
+
+[node name="LoseLabel" type="Label" parent="."]
+offset_left = -27.377
+offset_top = -280.442
+offset_right = 431.623
+offset_bottom = -82.4425
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 140
+text = "Lose!"
 
 [connection signal="pressed" from="AgainButton" to="." method="_on_again_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

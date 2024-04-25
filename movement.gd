@@ -16,6 +16,9 @@ var scroll_normal : int = 4
 var scroll_speed : int = scroll_normal
 const OBSTACLE_DELAY : int = 100
 const OBSTACLE_RANGE : int = 300
+
+signal resetDistance
+signal resetCoins
    
 
 func _ready():
@@ -34,6 +37,9 @@ func new_game():
 	generate_obstacles()
 	$ObstacleTimer.start()
 	$PowerupSpawnTimer.start()
+	emit_signal("resetCoins")
+	
+	$DistanceTimer.start()
 
 
 func _process(_delta):
@@ -139,6 +145,10 @@ func _on_player_death():
 	$ObstacleTimer.stop()
 	$"BGM-Generic".stop()
 	$SpeedRampTimer.stop()
+	
+	$DistanceTimer.stop()
+	emit_signal("resetDistance")
+	
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
 			obstacle.queue_free()
