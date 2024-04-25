@@ -4,7 +4,7 @@ extends CanvasLayer
 func _ready():
 	Global.gold = Global.item_list["Gold"]
 	$Panel/Gold.text = "$ " + str(Global.item_list["Gold"])
-	get_node("ShopAnimation").play("TransIn")
+	#get_node("ShopAnimation").play("TransIn")
 	Global.gold_update.connect(gold_update)
 
 func gold_update():

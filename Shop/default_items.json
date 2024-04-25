@@ -2,7 +2,7 @@
 	"Gold": 1000,
 	"0":{
 		"Name": "MIDAS",
-		"Cost": 10,
+		"Cost": 100,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Increase the rate of gold appearing by x",
@@ -10,7 +10,7 @@
 	},
 	"1":{
 		"Name": "Booster",
-		"Cost": 20,
+		"Cost": 200,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Give a headstart x distance",
@@ -18,7 +18,7 @@
 	},
 	"2":{
 		"Name": "Shield",
-		"Cost": 30,
+		"Cost": 300,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Gain a shield for x seconds every y second",
@@ -26,27 +26,90 @@
 	},
 	"3":{
 		"Name": "More Value",
-		"Cost": 40,
+		"Cost": 400,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Increase the value of each gold",
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"4":{
-		"Name": "Rocket 1",
-		"Cost": 50,
+		"Name": "Default",
+		"Cost": 0,
 		"Status": 0,
-		"Type": "Skin",
+		"Type": "Power",
 		"Description": "The third item",
-		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+		"Image": "res://images/rocket-1.png"
 	},
 	"5":{
+		"Name": "Default",
+		"Cost": 0,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "The third item",
+		"Image": "res://images/rocket-1.png"
+	},
+	"6":{
+		"Name": "Default",
+		"Cost": 0,
+		"Status": 0,
+		"Type": "Power",
+		"Description": "The third item",
+		"Image": "res://images/rocket-1.png"
+	},
+	"7":{
+		"Name": "Default",
+		"Cost": 0,
+		"Status": 3,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/rocket-1.png"
+	},
+	"8":{
 		"Name": "Rocket 2",
-		"Cost": 50,
+		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
 		"Description": "The third item",
-		"Image": "res://images/rocket-1-on/rocket-2-on.png"
+		"Image": "res://images/rocket-2.png"
 	},
-	
+	"9":{
+		"Name": "Rocket 3",
+		"Cost": 1000,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/rocket-3.png"
+	},
+	"10":{
+		"Name": "Rocket 4",
+		"Cost": 1000,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/ship3/vehicle-2.png"
+	},
+	"11":{
+		"Name": "Rocket 5",
+		"Cost": 1000,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/ship by Craftpix.net/Ship1/Ship1.png"
+	},
+	"12":{
+		"Name": "Rocket 6",
+		"Cost": 1000,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/ship by Craftpix.net/Ship2/Ship2.png"
+	},
+	"13":{
+		"Name": "Rocket 7",
+		"Cost": 1000,
+		"Status": 0,
+		"Type": "Skin",
+		"Description": "The third item",
+		"Image": "res://images/ship by Craftpix.net/Ship3/Ship3.png"
+	},
 }

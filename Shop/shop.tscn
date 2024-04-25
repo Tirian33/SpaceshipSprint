@@ -57,7 +57,7 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd1nq"]
-bg_color = Color(0, 0.0745098, 0.117647, 0.439216)
+bg_color = Color(0, 0.141176, 0.203922, 0.835294)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -97,23 +97,6 @@ offset_bottom = 80.2
 theme = ExtResource("1_x47ed")
 text = "Close"
 
-[node name="ShopName" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -232.0
-offset_top = 16.0
-offset_right = 232.0
-offset_bottom = 100.0
-grow_horizontal = 2
-theme = ExtResource("1_x47ed")
-theme_override_font_sizes/font_size = 42
-text = "Upgrade Shop
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Gold" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 52.0
@@ -138,6 +121,28 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Title" type="Label" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -0.200005
+offset_top = -259.0
+offset_right = 0.200073
+offset_bottom = -171.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.231373, 0.509804, 0.34902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "Upgrade Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Timer" type="Timer" parent="Panel"]
 wait_time = 5.0
 autostart = true
@@ -153,9 +158,9 @@ offset_right = -36.5999
 offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 105
+theme_override_constants/h_separation = 123
 theme_override_constants/v_separation = 165
-columns = 8
+columns = 7
 
 [node name="0" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
@@ -173,6 +178,30 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="5" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="6" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="7" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="8" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="9" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="10" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="11" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="12" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
+layout_mode = 2
+
+[node name="13" parent="Panel/GridContainer" instance=ExtResource("3_cf04j")]
 layout_mode = 2
 
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
