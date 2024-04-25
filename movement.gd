@@ -168,6 +168,9 @@ func _on_player_death():
 	obstacles.clear()
 	scroll_speed = 4
 	$"LoseScreen".show()
+	
+	Global.item_list["Gold"] = Global.gold
+	Global.write_save(Global.item_list)
 
 
 func _on_player_make_gold():

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b50od5lyfon12" path="res://coin.tscn" id="2_atrph"]
 [ext_resource type="AudioStream" uid="uid://by1tvvu40li7r" path="res://audio/BGM-Game.tres" id="3_8b60g"]
 [ext_resource type="PackedScene" uid="uid://chyyxojx7m5sk" path="res://player.tscn" id="3_vyhpb"]
-[ext_resource type="PackedScene" uid="uid://bhgqgx42vn80v" path="res://powerUpHandler.tscn" id="4_0227j"]
+[ext_resource type="PackedScene" path="res://powerUpHandler.tscn" id="4_0227j"]
 [ext_resource type="Script" path="res://Continue Button.gd" id="5_hltyd"]
 [ext_resource type="Script" path="res://Menu Button.gd" id="6_1jfmi"]
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]

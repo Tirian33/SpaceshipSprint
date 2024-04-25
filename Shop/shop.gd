@@ -9,6 +9,7 @@ func _ready():
 
 func gold_update():
 	$Panel/Gold.text = "$ " + str(Global.gold)
+	Global.item_list["Gold"] = Global.gold
 
 func _on_close_button_pressed():
 	get_node("ShopAnimation").play("TransOut")

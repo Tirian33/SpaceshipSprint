@@ -1,5 +1,5 @@
 {
-	"Gold": 1000,
+	"Gold": 0,
 	"0":{
 		"Name": "MIDAS",
 		"Cost": 100,
@@ -33,7 +33,7 @@
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"4":{
-		"Name": "Default",
+		"Name": "Rainbow",
 		"Cost": 0,
 		"Status": 0,
 		"Type": "Power",

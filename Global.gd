@@ -11,12 +11,14 @@ var item_list = {}
 
 #status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped
 func _ready():
-	new_save()
+	#new_save()               #for testing with save file
+	print(read_save())
 	if not read_save():
 		new_save()
 	else:
 		item_list = read_save()
 	gold = item_list["Gold"]
+
 
 #checking if a specific item is enabled
 #need a loop to check all item when using

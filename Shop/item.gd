@@ -1,6 +1,5 @@
 extends Control
 
-signal goldChanged
 @onready var button = $Panel/VBoxContainer/Button
 @onready var warning = $"../../Warning"
 @onready var item_key = self.get_name()
@@ -67,7 +66,7 @@ func _on_button_pressed():
 		button.text = "Equip"
 		status = 2
 	save_update()
-	print(Global.item_list[item_key]["Status"])
+	#print(Global.item_list[item_key]["Status"])
 
 func skin_off():
 	if status == 3:

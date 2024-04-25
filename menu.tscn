@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://menu.gd" id="1_6dsx7"]
 [ext_resource type="Texture2D" uid="uid://ni1uctym0wl8" path="res://images/MainMenuArt.jpg" id="2_hgxwe"]
+[ext_resource type="PackedScene" uid="uid://b8w886bojhjsa" path="res://Shop/shop.tscn" id="3_xjkpy"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_6dsx7")
@@ -46,6 +47,8 @@ theme_override_font_sizes/font_size = 110
 text = "Spaceship Sprint"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Shop" parent="." instance=ExtResource("3_xjkpy")]
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
