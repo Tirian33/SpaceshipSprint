@@ -78,7 +78,7 @@ offset_right = 677.0
 offset_bottom = 67.0
 script = ExtResource("12_2q63p")
 
-[node name="DistanceTimer" type="Timer" parent="."]
+[node name="SecondTimer" type="Timer" parent="."]
 
 [connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
 [connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
@@ -94,4 +94,4 @@ script = ExtResource("12_2q63p")
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="generate_powerup"]
 [connection signal="new_run" from="LoseScreen" to="." method="new_game"]
 [connection signal="timeout" from="SpeedRampTimer" to="." method="_on_speed_ramp_timer_timeout"]
-[connection signal="timeout" from="DistanceTimer" to="DistanceLabel" method="_on_distance_timer_timeout"]
+[connection signal="timeout" from="SecondTimer" to="DistanceLabel" method="_on_second_timer_timeout"]

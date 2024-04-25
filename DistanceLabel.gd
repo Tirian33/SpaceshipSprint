@@ -1,17 +1,14 @@
 extends Label
 
-var distance := 0
-var time := 0
-
 
 func _process(_delta) -> void:
-	text = "Distance: " + str(distance)
+	text = "Distance: " + str(Global.distance)
 
 
-func _on_distance_timer_timeout():
-	time = time + 1
+func _on_second_timer_timeout():
+	Global.time += 1
 
 
 func _on_gamemain_reset_distance():
-	time = 0
-	distance = 0
+	Global.time = 0
+	Global.distance = 0
