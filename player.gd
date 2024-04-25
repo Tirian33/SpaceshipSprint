@@ -14,7 +14,6 @@ signal go_rainbow
 @export var rotateSpeed = 90
 @export var powerUpState = ""
 @export var powerUpDuration = 15
-@export var coins = 0
 
 var spaceshipDown = deg_to_rad(120)
 var spaceshipUp = deg_to_rad(60)
@@ -61,7 +60,6 @@ func _process(delta):
 
 func start():
 	print_debug("RESTART")
-	coins = 0
 	position.x = 75
 	position.y = 324 #75, 324
 	alive = true
@@ -129,11 +127,8 @@ func _on_area_entered_player(area):
 	
 	if area.is_in_group("coins"):
 		area.queue_free()
-		coins +=1
-		# increment play gold by 1
-		print("Player has " + str(coins) + " gold!")
 		emit_signal("pluscoin")
-		
+
 	elif area.is_in_group("powerup"):
 		match area.get_meta("effectID"):
 			0:
@@ -153,10 +148,11 @@ func _on_area_entered_player(area):
 		area.break_apart()
 	elif powerUpState == "midas":
 		area.become_coin()
-		coins += 2
+		emit_signal("pluscoin")
+		emit_signal("pluscoin")
 	elif powerUpState == "rainbow":
 		area.become_coin()
-		coins += 1
+		emit_signal("pluscoin")
 	else:
 		die()
 

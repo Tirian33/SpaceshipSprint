@@ -18,7 +18,6 @@ func break_apart():
 func become_coin():
 	# TODO: Start some cool coin collection animation or something
 	#print_debug("Asteroid coin.")
-	# TODO: Score should increment same as coin
 	queue_free()
 
 
