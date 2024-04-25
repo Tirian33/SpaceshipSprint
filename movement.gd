@@ -17,6 +17,9 @@ var scroll_speed : int = scroll_normal
 const OBSTACLE_DELAY : int = 100
 const OBSTACLE_RANGE : int = 300
 
+var last_asteroid_y = -100
+var last_coin_y = -100
+
 signal resetDistance
 signal resetCoins
    
@@ -74,7 +77,8 @@ func generate_obstacles():
 	elif chance == 0:
 		generate_coin()
 	else:
-		generate_coin(generate_asteroid())
+		generate_asteroid()
+		generate_coin()
 
 
 func generate_asteroid():
@@ -94,26 +98,27 @@ func generate_asteroid():
 	add_child(asteroid)
 	obstacles.append(asteroid)
 	
-	return asteroid.position.y
+	last_asteroid_y = asteroid.position.y
 
 
-func generate_coin(not_here: int = -31):
-	
+func generate_coin():
+
 	var attemptedY = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
-	
+
 	#Only generate the coin if it is not in an obstacle
-	if abs(not_here - attemptedY) > 30:
+	if abs(last_asteroid_y - attemptedY) > 60:
 		var coin : Area2D = coin_scene.instantiate()
 		coin.position.x = screen_size.x + OBSTACLE_DELAY
 		coin.position.y = attemptedY
 		add_child(coin)
 		obstacles.append(coin)
+		last_coin_y = coin.position.y
 
 
 func generate_powerup():
 	var powerup : Area2D = powerup_placeholder.instantiate()
 	#TODO: Add link to shop unlocks; if powerup not unlocked it doesn't spawn
-	
+
 	print_debug("POWERUP GENERATED")
 	var chance : int = random.randi_range(0, 16)
 	if chance <= 1:
@@ -124,11 +129,19 @@ func generate_powerup():
 		powerup.set_meta("effectID", 1)
 	else:
 		powerup.set_meta("effectID", 2)
-		
-	
+
 	powerup.position.x = screen_size.x + OBSTACLE_DELAY
-	powerup.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
-	
+
+	while true:
+		var powerup_range = OBSTACLE_RANGE - 60
+		var attemptedY = screen_size.y / 2 + random.randi_range(-powerup_range, powerup_range)
+		if abs(last_coin_y - attemptedY) < 60:
+			continue
+		if abs(last_asteroid_y - attemptedY) < 60:
+			continue
+		powerup.position.y = attemptedY
+		break
+
 	add_child(powerup)
 	obstacles.append(powerup)
 
