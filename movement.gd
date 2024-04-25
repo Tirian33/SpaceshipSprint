@@ -49,6 +49,8 @@ func _process(_delta):
 	if not is_game_running:
 		return
 
+	$DistanceLabel.distance += scroll_speed
+
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
 			obstacle.position.x -= scroll_speed
