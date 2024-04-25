@@ -45,7 +45,7 @@ func new_game():
 	$SecondTimer.start()
 
 
-func _process(_delta):
+func _process(delta):
 	if not is_game_running:
 		return
 
@@ -55,7 +55,7 @@ func _process(_delta):
 
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
-			obstacle.position.x -= scroll_speed
+			obstacle.position.x -= scroll_speed * delta * 60
 
 	if scroll_speed != scroll_normal:
 		var tl = $Player/PowerUpTimer.get_time_left()
@@ -159,10 +159,6 @@ func _on_player_death():
 	is_game_running = false
 
 	Global.gold += Global.coins
-	# Yes, I know this is a very round-a-bout way of doing this,
-	# but Godot will throw a warning due to type nonsense if done simpler.
-	Global.gold += int(Global.distance / 1000.0)
-	Global.gold += int(Global.time / 10.0)
 
 	$ObstacleTimer.stop()
 	$"BGM-Generic".stop()
