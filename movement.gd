@@ -87,10 +87,8 @@ func generate_asteroid():
 	var asteroid : Area2D = asteroid_scene.instantiate()
 	asteroid.position.x = screen_size.x + OBSTACLE_DELAY
 	asteroid.position.y = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
-	
-	# Change asteroid sprite
-	var asteroid_sprite : AnimatedSprite2D = asteroid.get_node("./AnimatedSprite2D")
-	asteroid_sprite.frame = random.randi_range(0, 31)
+
+	asteroid.rotation = deg_to_rad(random.randi_range(0, 360))
 
 	if asteroid_type == "gold":
 		asteroid.become_gold()

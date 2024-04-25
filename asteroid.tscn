@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://xbjumey62l0t"]
+[gd_scene load_steps=36 format=3 uid="uid://xbjumey62l0t"]
 
 [ext_resource type="Script" path="res://asteroid.gd" id="1_5htpd"]
 [ext_resource type="Texture2D" uid="uid://sh78pfb4qdfv" path="res://images/obstacles/animated_asteroid.png" id="1_n12ko"]
@@ -235,14 +235,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p1jeb"]
-radius = 34.0
-
 [node name="Asteroid" type="Area2D" groups=["asteroids"]]
 script = ExtResource("1_5htpd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_12pem")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_p1jeb")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(2, -24, -7, -17, -10, -9, -21, -1, -25, 9, -25, 24, 16, 24, 22, 14, 25, 9, 25, 3, 18, -8, 15, -19, 15, -24)
