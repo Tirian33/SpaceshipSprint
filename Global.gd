@@ -30,7 +30,7 @@ func is_item_enable(id):
 		if item_list[id]["Status"] == 3:
 			return true
 	return false
-	
+
 
 func write_save(data):
 	var file = FileAccess.open(path, FileAccess.WRITE)
@@ -38,10 +38,14 @@ func write_save(data):
 	file.close()
 	file = null
 
+
 func read_save():
+	if not FileAccess.file_exists(path):
+		write_save({})
 	var file = FileAccess.open(path, FileAccess.READ)
 	var data = json.parse_string(file.get_as_text())
 	return data
+
 
 #create new save or overwrite the old save
 func new_save():
