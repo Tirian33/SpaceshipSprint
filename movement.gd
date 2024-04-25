@@ -50,7 +50,9 @@ func _process(_delta):
 		return
 
 	Global.distance += scroll_speed
- 
+
+	$PowerUpBar.value = $Player/PowerUpTimer.get_time_left()
+
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
 			obstacle.position.x -= scroll_speed
