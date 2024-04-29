@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhgqgx42vn80v"]
+[gd_scene load_steps=18 format=3 uid="uid://bhgqgx42vn80v"]
 
 [ext_resource type="Texture2D" uid="uid://csciv6v6os3hj" path="res://images/powerup/wheeling-2.png" id="1_ps5dl"]
 [ext_resource type="Script" path="res://powerup.gd" id="1_sl0ir"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://bod4nyw6x1enb" path="res://images/powerup/wheeling-12.png" id="10_3ixur"]
 [ext_resource type="Texture2D" uid="uid://bs1g2sek3v1or" path="res://images/powerup/wheeling-13.png" id="11_b8clx"]
 [ext_resource type="Texture2D" uid="uid://bv7n485ip4mic" path="res://images/powerup/wheeling-14.png" id="12_7sd4k"]
+[ext_resource type="Texture2D" uid="uid://cfxwbscg0xge5" path="res://images/basic-shield.png" id="14_cinr7"]
+[ext_resource type="Texture2D" uid="uid://cpyv3tqlm182j" path="res://images/powerup/RGB-Star.png" id="15_4h66o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_htk61"]
 animations = [{
@@ -75,4 +77,45 @@ sprite_frames = SubResource("SpriteFrames_htk61")
 frame_progress = 0.754292
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_ssw8o")
+
+[node name="2x" type="Label" parent="."]
+visible = false
+offset_left = -18.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.943723, 0.499151, 0.483162, 1)
+theme_override_font_sizes/font_size = 32
+text = "2X"
+
+[node name="Midas" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -30.0
+offset_right = 23.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(1, 0.980392, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "$$"
+
+[node name="Shield-top" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.530331, 1.91979e-06)
+rotation = -1.5708
+scale = Vector2(1.30772, 1.2357)
+texture = ExtResource("14_cinr7")
+
+[node name="Shield-bot" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.530331, 1.91979e-06)
+rotation = 1.5708
+scale = Vector2(1.30772, 1.2357)
+texture = ExtResource("14_cinr7")
+
+[node name="RGB" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -2)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("15_4h66o")

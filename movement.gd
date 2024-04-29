@@ -125,12 +125,16 @@ func generate_powerup():
 	var chance : int = random.randi_range(0, 16)
 	if chance <= 1:
 		powerup.set_meta("effectID", 3)
+		powerup.set_type(3)
 	elif chance <=6:
 		powerup.set_meta("effectID", 0)
+		powerup.set_type(0)
 	elif chance <=11:
 		powerup.set_meta("effectID", 1)
+		powerup.set_type(1)
 	else:
 		powerup.set_meta("effectID", 2)
+		powerup.set_type(2)
 
 	powerup.position.x = screen_size.x + OBSTACLE_DELAY
 
