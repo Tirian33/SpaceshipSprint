@@ -81,7 +81,7 @@ script = ExtResource("12_2q63p")
 [node name="SecondTimer" type="Timer" parent="."]
 
 [node name="PowerUpBar" type="ProgressBar" parent="."]
-offset_top = 621.0
+offset_top = 634.0
 offset_right = 1152.0
 offset_bottom = 648.0
 max_value = 15.0
