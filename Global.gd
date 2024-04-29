@@ -8,6 +8,7 @@ var gold : int = 0
 var coins : int = 0
 var distance : int = 0
 var time : int = 0
+var firstTime : int = 0
 var item_list = {}
 
 

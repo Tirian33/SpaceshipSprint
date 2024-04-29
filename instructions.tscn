@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://7maa54iwnh8s"]
+
+[ext_resource type="Script" path="res://instructions.gd" id="1_ajc2w"]
+[ext_resource type="Texture2D" uid="uid://c10s6qojcf22g" path="res://images/Instructionsscreen.jpg" id="2_fqkh1"]
+
+[node name="Instructions" type="Node2D"]
+script = ExtResource("1_ajc2w")
+
+[node name="Instructionsscreen" type="Sprite2D" parent="."]
+position = Vector2(564.25, 319.625)
+scale = Vector2(1.745, 1.02606)
+texture = ExtResource("2_fqkh1")
+
+[node name="InstructionsLabel" type="Label" parent="."]
+modulate = Color(0, 1, 1, 1)
+offset_right = 1157.0
+offset_bottom = 649.0
+theme_override_font_sizes/font_size = 40
+text = "Welcome to Spaceship Sprint!
+
+
+Use the spacebar (or left click) to guide the ship upwards.
+Going off the screen will result in death. 
+
+
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+modulate = Color(0, 1, 1, 1)
+offset_left = 442.0
+offset_top = 404.0
+offset_right = 670.0
+offset_bottom = 484.0
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

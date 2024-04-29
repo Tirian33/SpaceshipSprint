@@ -20,6 +20,8 @@ const OBSTACLE_RANGE : int = 300
 var last_asteroid_y = -100
 var last_coin_y = -100
 
+var firstgame := 0
+
 signal resetDistance
 signal resetCoins
    
@@ -30,7 +32,7 @@ func _ready():
 	new_game()
 
 
-func new_game():
+func new_game():	
 	random.randomize()
 	$"BGM-Generic".play()
 	$Player.start()
@@ -48,6 +50,7 @@ func new_game():
 func _process(delta):
 	if not is_game_running:
 		return
+
 
 	Global.distance += scroll_speed
 

@@ -65,6 +65,7 @@ visible = false
 wait_time = 0.25
 
 [node name="DistanceLabel" type="Label" parent="."]
+modulate = Color(0, 1, 1, 1)
 offset_left = 246.0
 offset_top = 3.0
 offset_right = 437.0
@@ -72,20 +73,56 @@ offset_bottom = 69.0
 script = ExtResource("11_rgntk")
 
 [node name="Coin Label" type="Label" parent="."]
-offset_left = 486.0
-offset_top = 1.0
-offset_right = 677.0
-offset_bottom = 67.0
+modulate = Color(0, 1, 1, 1)
+offset_left = 516.0
+offset_right = 707.0
+offset_bottom = 66.0
 script = ExtResource("12_2q63p")
 
 [node name="SecondTimer" type="Timer" parent="."]
 
 [node name="PowerUpBar" type="ProgressBar" parent="."]
+self_modulate = Color(0, 1, 1, 1)
 offset_top = 621.0
 offset_right = 1152.0
 offset_bottom = 648.0
 max_value = 15.0
 show_percentage = false
+
+[node name="TopBar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 1, 1)
+offset_right = 1152.0
+offset_bottom = 27.0
+show_percentage = false
+
+[node name="DirectionsLabel" type="Label" parent="."]
+visible = false
+self_modulate = Color(0, 1, 1, 1)
+offset_right = 1149.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 39
+text = "    Welcome to Spaceship Sprint!
+
+
+Use the spacebar (or left click) to guide the ship upwards.
+Going off the screen will result in death. 
+
+
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+visible = false
+modulate = Color(0, 1, 1, 1)
+offset_left = 450.0
+offset_top = 389.0
+offset_right = 761.0
+offset_bottom = 495.0
+theme_override_font_sizes/font_size = 34
+text = "Play!"
 
 [connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
 [connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
