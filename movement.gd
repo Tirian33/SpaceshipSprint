@@ -49,13 +49,15 @@ func _process(delta):
 	if not is_game_running:
 		return
 
-	Global.distance += scroll_speed
+	var dist_delta = scroll_speed * delta * 60
+
+	Global.distance += dist_delta
 
 	$PowerUpBar.value = $Player/PowerUpTimer.get_time_left()
 
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
-			obstacle.position.x -= scroll_speed * delta * 60
+			obstacle.position.x -= dist_delta
 
 	if scroll_speed != scroll_normal:
 		var tl = $Player/PowerUpTimer.get_time_left()
