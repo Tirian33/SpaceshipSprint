@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b8w886bojhjsa" path="res://Shop/shop.tscn" id="3_xjkpy"]
 
 [node name="Menu" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_6dsx7")
 
 [node name="MainMenuArt" type="Sprite2D" parent="."]
@@ -50,6 +51,15 @@ vertical_alignment = 1
 
 [node name="Shop" parent="." instance=ExtResource("3_xjkpy")]
 
+[node name="NewSaveButton" type="Button" parent="."]
+self_modulate = Color(0, 1, 1, 1)
+offset_left = 441.0
+offset_top = 529.0
+offset_right = 689.0
+offset_bottom = 607.0
+text = "Reset"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="NewSaveButton" to="." method="_on_new_save_button_pressed"]

@@ -6,7 +6,8 @@ signal return_normal
 signal go_fast
 signal go_rainbow
 
-@onready var spaceship = $Spaceship
+var ship_path = "./Spaceship" + str(Global.skin - 6)
+@onready var spaceship = get_node(ship_path)
 @onready var sfx = $thruster
 @onready var altSFX = $MiscAudio
 @onready var powerUpTimer = $PowerUpTimer
@@ -25,8 +26,7 @@ signal pluscoin
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	spaceship.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,6 +66,7 @@ func start():
 
 
 func die():
+	spaceship.visible = false
 	alive = false
 	sfx.stop()
 	altSFX.stop()

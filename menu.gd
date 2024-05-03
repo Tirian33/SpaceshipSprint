@@ -15,3 +15,10 @@ func _on_shop_button_pressed():
 func _on_quit_button_pressed():
 	get_tree().quit()
 	pass # Replace with function body.
+
+
+func _on_new_save_button_pressed():
+	Global.new_save()
+	Global.gold = 10000
+	Global.gold_update.emit()
+	Global.status_changed.emit()

@@ -12,8 +12,12 @@ extends Control
 @onready var type = item["Type"]
 @onready var status = item["Status"]
 
+var skin1 = "7"
+
 func _ready():
 	Global.skin_changed.connect(skin_off)
+	Global.status_changed.connect(update_status)
+	Global.default_ship.connect(default_skin)
 	$Panel/VBoxContainer/ItemName.text = item["Name"]
 	$Panel/VBoxContainer/ItemCost.text = "$" + str(cost)
 	$Panel/VBoxContainer/ItemImg.texture = ResourceLoader.load(item["Image"])
@@ -21,7 +25,12 @@ func _ready():
 	if type == "Skin":
 		$Panel.self_modulate = Color(0.502, 0.78, 0.69)
 		button.self_modulate = Color(0.502, 0.78, 0.69)
-	
+		
+		update_status()
+
+
+func update_status():
+	status = Global.item_list[item_key]["Status"]
 	if status == 0:
 		button.text = "Purchase"
 	if status == 1:
@@ -29,11 +38,11 @@ func _ready():
 	if status == 2:
 		button.text = "Equip"
 		button.toggle_mode = true
+		button.button_pressed = false
 	if status == 3:
 		button.text = "Equipped"
 		button.toggle_mode = true
 		button.button_pressed = true
-		
 
 func save_update():
 	Global.item_list[item_key]["Status"] = status
@@ -65,11 +74,23 @@ func _on_button_pressed():
 	elif status == 3:
 		button.text = "Equip"
 		status = 2
+		Global.default_ship.emit()
 	save_update()
-	#print(Global.item_list[item_key]["Status"])
+	Global.get_skin()
+
+func default_skin():
+	if item_key == skin1:
+		Global.skin_changed.emit()
+		button.text = "Equipped"
+		button.button_pressed = true
+		status = 3
+		print(status)
+	else:
+		pass
 
 func skin_off():
 	if status == 3:
 		status = 2
+		save_update()
 		button.text = "Equip"
 		button.button_pressed = false

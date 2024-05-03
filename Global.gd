@@ -4,27 +4,31 @@ var path = "user://shop.json"
 
 signal skin_changed
 signal gold_update
+signal status_changed
+signal default_ship
 var gold : int = 0
 var coins : int = 0
 var distance : int = 0
 var time : int = 0
 var item_list = {}
-
+var skin = 7
 
 #status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped
 func _ready():
 	#new_save()               #for testing with save file
-	print(read_save())
+	#print(read_save())
 	if not read_save():
 		new_save()
 	else:
 		item_list = read_save()
 	gold = item_list["Gold"]
+	get_skin()
 
 
 #checking if a specific item is enabled
 #need a loop to check all item when using
-func is_item_enable(id):
+func is_item_enable(id_num):
+	var id = str(id_num)
 	if item_list[id]["Type"] == "Power":
 		if item_list[id]["Status"] == 1:
 			return true
@@ -32,6 +36,11 @@ func is_item_enable(id):
 		if item_list[id]["Status"] == 3:
 			return true
 	return false
+
+func get_skin():
+	for id in range(7,14):
+		if Global.is_item_enable(id):
+			skin = id
 
 
 func write_save(data):
@@ -55,5 +64,5 @@ func new_save():
 	var data = JSON.parse_string(file.get_as_text())
 	item_list = data
 	write_save(data)
-
+	item_list = read_save()
 
