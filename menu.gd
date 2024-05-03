@@ -23,3 +23,4 @@ func _on_new_save_button_pressed():
 	Global.gold_update.emit()
 	Global.status_changed.emit()
 	Global.write_save(Global.item_list)
+	Global.get_skin()

@@ -20,13 +20,16 @@ var spaceshipDown = deg_to_rad(120)
 var spaceshipUp = deg_to_rad(60)
 var playing_sound = false
 var alive = true
-
+var ship_scale = Vector2(0.5,0.5)
+var life = 1
 signal pluscoin
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	spaceship.visible = true
+	power_smaller_ship()
+	power_double_value()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -63,20 +66,31 @@ func start():
 	position.x = 75
 	position.y = 324 #75, 324
 	alive = true
+	
+	spaceship.visible = true
+	power_second_chance()
 
 
 func die():
-	spaceship.visible = false
-	alive = false
-	sfx.stop()
-	altSFX.stop()
-	altSFX.stream = preload("res://audio/death.tres")
-	altSFX.play()
-	send_normal_signals()
-	powerUpState = ""
-	powerUpTimer.stop()
-	cust_grav = 250
-	death.emit()
+	if life == 1:
+		spaceship.visible = false
+		alive = false
+		sfx.stop()
+		altSFX.stop()
+		altSFX.stream = preload("res://audio/death.tres")
+		altSFX.play()
+		send_normal_signals()
+		powerUpState = ""
+		powerUpTimer.stop()
+		cust_grav = 250
+		death.emit()
+	elif life == 2:
+		life -= 1
+		spaceship.visible = false
+		$CollisionShape2D.hide()
+		await(3.0)
+		$CollisionShape2D.show()
+		spaceship.visible = true
 	
 
 
@@ -124,6 +138,25 @@ func power_rgb():
 	altSFX.play()
 	powerUpTimer.start(powerUpDuration)
 
+func power_smaller_ship():
+		#smaller ship power
+	if Global.item_list["5"]["Status"] == 1:
+		spaceship.scale *= ship_scale
+		$CollisionShape2D.scale *= ship_scale
+	print_debug(Global.item_list["5"]["Status"])
+
+func power_second_chance():
+	if Global.item_list["6"]["Status"] == 1:
+		life = 2
+	else:
+		life = 1
+
+func power_double_value():
+	if Global.item_list["6"]["Status"] == 1:
+		Global.coin_mult = 2
+	else:
+		Global.coin_mult = 1
+
 func _on_area_entered_player(area):
 	if not is_instance_valid(area):
 		return
@@ -166,3 +199,4 @@ func _on_power_up_timer_timeout():
 	send_normal_signals()
 
 	powerUpState = ""
+

@@ -22,11 +22,10 @@ func _ready():
 	$Panel/VBoxContainer/ItemCost.text = "$" + str(cost)
 	$Panel/VBoxContainer/ItemImg.texture = ResourceLoader.load(item["Image"])
 	
+	update_status()
 	if type == "Skin":
 		$Panel.self_modulate = Color(0.502, 0.78, 0.69)
 		button.self_modulate = Color(0.502, 0.78, 0.69)
-		
-		update_status()
 
 
 func update_status():

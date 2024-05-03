@@ -6,55 +6,55 @@
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Increase the rate of gold appearing by x",
-		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+		"Image": "res://images/Shop_items/ShieldImg.png"
 	},
 	"1":{
-		"Name": "Midas",
+		"Name": "Fast",
 		"Cost": 200,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Give a headstart x distance",
-		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+		"Image": "res://images/Shop_items/Fast.png"
 	},
 	"2":{
-		"Name": "Dash",
+		"Name": "Double Value",
 		"Cost": 300,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Gain a shield for x seconds every y second",
-		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+		"Image": "res://images/Shop_items/DoubleValueImg.png"
 	},
 	"3":{
-		"Name": "Rainbow",
+		"Name": "Midas",
 		"Cost": 400,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "Increase the value of each gold",
-		"Image": "res://images/rocket-1-on/rocket-1-on.png"
+		"Image": "res://images/Shop_items/Midas.png"
 	},
 	"4":{
-		"Name": "Default",
-		"Cost": 0,
+		"Name": "Rainbow",
+		"Cost": 500,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "The third item",
-		"Image": "res://images/rocket-1.png"
+		"Image": "res://images/Shop_items/Rainbow.png"
 	},
 	"5":{
-		"Name": "Default",
-		"Cost": 0,
+		"Name": "Smaller Ship",
+		"Cost": 500,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "The third item",
-		"Image": "res://images/rocket-1.png"
+		"Image": "res://images/Shop_items/SmallerShipImg.png"
 	},
 	"6":{
-		"Name": "Default",
-		"Cost": 0,
+		"Name": "Second Chance",
+		"Cost": 500,
 		"Status": 0,
 		"Type": "Power",
 		"Description": "The third item",
-		"Image": "res://images/rocket-1.png"
+		"Image": "res://images/Shop_items/SecondChanceImg.png"
 	},
 	"7":{
 		"Name": "Default Ship",

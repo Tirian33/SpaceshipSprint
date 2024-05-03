@@ -13,11 +13,11 @@ var time : int = 0
 var item_list = {}
 var skin = 7
 var coin_mult = 1
+var life = 1
 
 #status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped
 func _ready():
 	#new_save()               #for testing with save file
-	#print(read_save())
 	if not read_save():
 		new_save()
 	else:
@@ -56,6 +56,7 @@ func read_save():
 		write_save({})
 	var file = FileAccess.open(path, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
+	file = null
 	return data
 
 
@@ -65,5 +66,5 @@ func new_save():
 	var data = JSON.parse_string(file.get_as_text())
 	item_list = data
 	write_save(data)
-	item_list = read_save()
+
 
