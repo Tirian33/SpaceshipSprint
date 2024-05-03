@@ -1,7 +1,7 @@
 {
 	"Gold": 0,
 	"0":{
-		"Name": "MIDAS",
+		"Name": "Shield",
 		"Cost": 100,
 		"Status": 0,
 		"Type": "Power",
@@ -9,7 +9,7 @@
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"1":{
-		"Name": "Booster",
+		"Name": "Midas",
 		"Cost": 200,
 		"Status": 0,
 		"Type": "Power",
@@ -17,7 +17,7 @@
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"2":{
-		"Name": "Shield",
+		"Name": "Dash",
 		"Cost": 300,
 		"Status": 0,
 		"Type": "Power",
@@ -25,7 +25,7 @@
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"3":{
-		"Name": "More Value",
+		"Name": "Rainbow",
 		"Cost": 400,
 		"Status": 0,
 		"Type": "Power",
@@ -33,7 +33,7 @@
 		"Image": "res://images/rocket-1-on/rocket-1-on.png"
 	},
 	"4":{
-		"Name": "Rainbow",
+		"Name": "Default",
 		"Cost": 0,
 		"Status": 0,
 		"Type": "Power",
@@ -57,7 +57,7 @@
 		"Image": "res://images/rocket-1.png"
 	},
 	"7":{
-		"Name": "Default",
+		"Name": "Default Ship",
 		"Cost": 0,
 		"Status": 3,
 		"Type": "Skin",
@@ -65,7 +65,7 @@
 		"Image": "res://images/rocket-1-off.png"
 	},
 	"8":{
-		"Name": "Rocket 2",
+		"Name": "Ship 2",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
@@ -73,7 +73,7 @@
 		"Image": "res://images/ship2/vehicle-2.png"
 	},
 	"9":{
-		"Name": "Rocket 3",
+		"Name": "Ship 3",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
@@ -81,7 +81,7 @@
 		"Image": "res://images/Spaceships by Craftpix.net/images/Ship1.png"
 	},
 	"10":{
-		"Name": "Rocket 4",
+		"Name": "Ship 4",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
@@ -89,7 +89,7 @@
 		"Image": "res://images/Spaceships by Craftpix.net/images/Ship2.png"
 	},
 	"11":{
-		"Name": "Rocket 5",
+		"Name": "Ship 5",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
@@ -97,7 +97,7 @@
 		"Image": "res://images/Spaceships by Craftpix.net/images/Ship3.png"
 	},
 	"12":{
-		"Name": "Rocket 6",
+		"Name": "Ship 6",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",
@@ -105,7 +105,7 @@
 		"Image": "res://images/Spaceships by Craftpix.net/images/Ship4.png"
 	},
 	"13":{
-		"Name": "Rocket 7",
+		"Name": "Ship 7",
 		"Cost": 1000,
 		"Status": 0,
 		"Type": "Skin",

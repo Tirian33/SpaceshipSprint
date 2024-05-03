@@ -33,6 +33,7 @@ func update_status():
 	status = Global.item_list[item_key]["Status"]
 	if status == 0:
 		button.text = "Purchase"
+		button.button_pressed = false
 	if status == 1:
 		button.text = "Purchased"
 	if status == 2:
@@ -60,6 +61,7 @@ func _on_button_pressed():
 			status = 2
 			button.text = "Equip"
 			button.toggle_mode = true
+			button.button_pressed = false
 		
 	elif status == 0 and Global.gold < Global.gold:
 		warning.text = "Not Enough Gold"
@@ -74,9 +76,11 @@ func _on_button_pressed():
 	elif status == 3:
 		button.text = "Equip"
 		status = 2
+		button.button_pressed = false
 		Global.default_ship.emit()
 	save_update()
 	Global.get_skin()
+
 
 func default_skin():
 	if item_key == skin1:
@@ -84,13 +88,13 @@ func default_skin():
 		button.text = "Equipped"
 		button.button_pressed = true
 		status = 3
-		print(status)
+		save_update()
 	else:
 		pass
 
 func skin_off():
 	if status == 3:
 		status = 2
-		save_update()
 		button.text = "Equip"
 		button.button_pressed = false
+		save_update()
