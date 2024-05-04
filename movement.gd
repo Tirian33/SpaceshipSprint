@@ -120,23 +120,33 @@ func generate_coin():
 
 
 func generate_powerup():
-	var powerup : Area2D = powerup_placeholder.instantiate()
-	#TODO: Add link to shop unlocks; if powerup not unlocked it doesn't spawn
+	var effects = []
 
-	print_debug("POWERUP GENERATED")
-	var chance : int = random.randi_range(0, 16)
-	if chance <= 1:
-		powerup.set_meta("effectID", 3)
-		powerup.set_type(3)
-	elif chance <=6:
-		powerup.set_meta("effectID", 0)
-		powerup.set_type(0)
-	elif chance <=11:
-		powerup.set_meta("effectID", 1)
-		powerup.set_type(1)
-	else:
-		powerup.set_meta("effectID", 2)
-		powerup.set_type(2)
+	# Shield Powerup
+	if Global.item_list["0"]["Status"] == 1:
+		effects.append_array([0, 0, 0, 0, 0])
+
+	# 2x Speed Powerup
+	if Global.item_list["1"]["Status"] == 1:
+		effects.append_array([2, 2, 2, 2, 2])
+
+	# Midas Powerup
+	if Global.item_list["3"]["Status"] == 1:
+		effects.append_array([1, 1, 1, 1, 1])
+
+	# Rainbow Powerup
+	if Global.item_list["4"]["Status"] == 1:
+		effects.append(3)
+
+	if not len(effects):
+		return
+
+	var choice : int = random.randi_range(0, len(effects))
+
+	var powerup : Area2D = powerup_placeholder.instantiate()
+
+	powerup.set_meta("effectID", effects[choice])
+	powerup.set_type(effects[choice])
 
 	powerup.position.x = screen_size.x + OBSTACLE_DELAY
 
@@ -153,6 +163,7 @@ func generate_powerup():
 	add_child(powerup)
 	obstacles.append(powerup)
 
+	print_debug("POWERUP GENERATED")
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
