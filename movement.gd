@@ -131,14 +131,15 @@ func generate_powerup():
 		effects.append_array([2, 2, 2, 2, 2])
 
 	# Midas Powerup
-	if Global.item_list["3"]["Status"] == 1:
+	if Global.item_list["2"]["Status"] == 1:
 		effects.append_array([1, 1, 1, 1, 1])
 
 	# Rainbow Powerup
-	if Global.item_list["4"]["Status"] == 1:
+	if Global.item_list["3"]["Status"] == 1:
 		effects.append(3)
 
 	if not len(effects):
+		print_debug("No powerups purchased")
 		return
 
 	var choice : int = random.randi_range(0, len(effects))

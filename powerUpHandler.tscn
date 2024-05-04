@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhgqgx42vn80v"]
+[gd_scene load_steps=20 format=3 uid="uid://bhgqgx42vn80v"]
 
 [ext_resource type="Texture2D" uid="uid://csciv6v6os3hj" path="res://images/powerup/wheeling-2.png" id="1_ps5dl"]
 [ext_resource type="Script" path="res://powerup.gd" id="1_sl0ir"]
@@ -13,8 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bod4nyw6x1enb" path="res://images/powerup/wheeling-12.png" id="10_3ixur"]
 [ext_resource type="Texture2D" uid="uid://bs1g2sek3v1or" path="res://images/powerup/wheeling-13.png" id="11_b8clx"]
 [ext_resource type="Texture2D" uid="uid://bv7n485ip4mic" path="res://images/powerup/wheeling-14.png" id="12_7sd4k"]
-[ext_resource type="Texture2D" uid="uid://cfxwbscg0xge5" path="res://images/basic-shield.png" id="14_cinr7"]
-[ext_resource type="Texture2D" uid="uid://cpyv3tqlm182j" path="res://images/powerup/RGB-Star.png" id="15_4h66o"]
+[ext_resource type="Texture2D" uid="uid://b5djbt3xunbne" path="res://images/Shop_items/ShieldImg.png" id="14_ceqdt"]
+[ext_resource type="Texture2D" uid="uid://dcuv38axapipn" path="res://images/Shop_items/Midas.png" id="15_yus0n"]
+[ext_resource type="Texture2D" uid="uid://b54shbeks3s0c" path="res://images/Shop_items/Fast.png" id="16_impto"]
+[ext_resource type="Texture2D" uid="uid://cjjts1whkwsqf" path="res://images/Shop_items/Rainbow.png" id="17_u2x23"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_htk61"]
 animations = [{
@@ -80,42 +82,22 @@ frame_progress = 0.754292
 visible = false
 shape = SubResource("CircleShape2D_ssw8o")
 
-[node name="2x" type="Label" parent="."]
+[node name="Shield" type="Sprite2D" parent="."]
 visible = false
-offset_left = -18.0
-offset_top = -26.0
-offset_right = 20.0
-offset_bottom = 19.0
-theme_override_colors/font_color = Color(0.943723, 0.499151, 0.483162, 1)
-theme_override_font_sizes/font_size = 32
-text = "2X"
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("14_ceqdt")
 
-[node name="Midas" type="Label" parent="."]
+[node name="Midas" type="Sprite2D" parent="."]
 visible = false
-offset_left = -23.0
-offset_top = -30.0
-offset_right = 23.0
-offset_bottom = 25.0
-theme_override_colors/font_color = Color(1, 0.980392, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "$$"
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("15_yus0n")
 
-[node name="Shield-top" type="Sprite2D" parent="."]
+[node name="Fast" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-0.530331, 1.91979e-06)
-rotation = -1.5708
-scale = Vector2(1.30772, 1.2357)
-texture = ExtResource("14_cinr7")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("16_impto")
 
-[node name="Shield-bot" type="Sprite2D" parent="."]
+[node name="Rainbow" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-0.530331, 1.91979e-06)
-rotation = 1.5708
-scale = Vector2(1.30772, 1.2357)
-texture = ExtResource("14_cinr7")
-
-[node name="RGB" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1, -2)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("15_4h66o")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("17_u2x23")

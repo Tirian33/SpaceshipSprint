@@ -12,13 +12,12 @@ func _ready():
 func set_type(type):
 	match type:
 		0:
-			$"Shield-bot".show()
-			$"Shield-top".show()
+			$"Shield".show()
 		1:
 			$Midas.show()
 		2:
-			$"2x".show()
+			$"Fast".show()
 		3:
-			$RGB.show()
+			$"Rainbow".show()
 		_:
 			print_debug("Powerup not recognized")
