@@ -5,6 +5,7 @@ signal make_gold
 signal return_normal
 signal go_fast
 signal go_rainbow
+signal drop_heart
 
 var ship_path = "./Spaceship" + str(Global.skin - 6)
 @onready var spaceship = get_node(ship_path)
@@ -28,7 +29,6 @@ signal pluscoin
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	power_smaller_ship()
-	power_double_value()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,7 +58,7 @@ func _process(delta):
 	position += Vector2.DOWN * cust_grav * delta * pointing
 	
 	if position.y < -1 or position.y > 649:
-		die()
+		die(true)
 
 
 func start():
@@ -71,8 +71,8 @@ func start():
 	power_second_chance()
 
 
-func die():
-	if life == 1:
+func die(insta_kill):
+	if life == 1 or insta_kill:
 		spaceship.visible = false
 		alive = false
 		sfx.stop()
@@ -85,11 +85,10 @@ func die():
 		cust_grav = 250
 		death.emit()
 	elif life == 2:
+		drop_heart.emit()
 		life -= 1
-		spaceship.visible = false
-		$CollisionShape2D.hide()
-		$CollisionShape2D.show()
-		spaceship.visible = true
+		$SFX.stream = preload("res://audio/second-chance-activate.tres")
+		$SFX.play()
 
 
 func send_normal_signals():
@@ -150,13 +149,6 @@ func power_second_chance():
 		life = 1
 
 
-func power_double_value():
-	if Global.item_list["5"]["Status"] == 1:
-		Global.coin_mult = 2
-	else:
-		Global.coin_mult = 1
-
-
 func play_coin_sfx():
 	$SFX.stream = preload("res://audio/coin.tres")
 	$SFX.play()
@@ -204,7 +196,7 @@ func _on_area_entered_player(area):
 		area.queue_free()
 		emit_signal("pluscoin")
 	else:
-		die()
+		die(false)
 
 
 func _on_power_up_timer_timeout():

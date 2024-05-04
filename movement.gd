@@ -31,6 +31,18 @@ func _ready():
 
 
 func new_game():
+	if Global.item_list["5"]["Status"] == 1:
+		$PowerupSpawnTimer.start(20)
+		$"2xActive".visible = true
+	else:
+		$PowerupSpawnTimer.start(40)
+		$"2xActive".visible = false
+
+	if Global.item_list["6"]["Status"] == 1:
+		$"SecondChanceActive".visible = true
+	else:
+		$"SecondChanceActive".visible = false
+
 	random.randomize()
 	$"BGM-Generic".play()
 	$Player.start()
@@ -39,7 +51,6 @@ func new_game():
 	obstacles.clear()
 	generate_obstacles()
 	$ObstacleTimer.start()
-	$PowerupSpawnTimer.start()
 	emit_signal("resetCoins")
 	
 	$SecondTimer.start()
@@ -237,3 +248,7 @@ func _on_speed_ramp_timer_timeout():
 
 	if scroll_speed == scroll_normal:
 		$SpeedRampTimer.stop()
+
+
+func _on_player_drop_heart():
+	$"SecondChanceActive".visible = false

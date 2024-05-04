@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4r6hlg68k1xv"]
+[gd_scene load_steps=15 format=3 uid="uid://b4r6hlg68k1xv"]
 
 [ext_resource type="Script" path="res://movement.gd" id="1_lqokm"]
 [ext_resource type="PackedScene" uid="uid://dq0p1by0vqkb7" path="res://Starfield-background.tscn" id="1_vvpd2"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]
 [ext_resource type="Script" path="res://DistanceLabel.gd" id="11_rgntk"]
 [ext_resource type="Script" path="res://Coin Label.gd" id="12_2q63p"]
+[ext_resource type="Texture2D" uid="uid://bms8sgugbcmlp" path="res://images/Shop_items/DoubleValueImg.png" id="13_e4gci"]
+[ext_resource type="Texture2D" uid="uid://dtgx6migjr4mw" path="res://images/Shop_items/SecondChanceImg.png" id="14_xm5t0"]
 
 [node name="Game-main" type="Node"]
 editor_description = "Game running modules like the pause menu, UI, player, obstacle field."
@@ -87,9 +89,22 @@ offset_bottom = 648.0
 max_value = 15.0
 show_percentage = false
 
+[node name="2xActive" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(33, 33)
+scale = Vector2(2, 2)
+texture = ExtResource("13_e4gci")
+
+[node name="SecondChanceActive" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(32, 616)
+scale = Vector2(2, 2)
+texture = ExtResource("14_xm5t0")
+
 [connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
 [connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="drop_heart" from="Player" to="." method="_on_player_drop_heart"]
 [connection signal="go_fast" from="Player" to="." method="_on_player_go_fast"]
 [connection signal="go_rainbow" from="Player" to="." method="_on_player_go_rainbow"]
 [connection signal="make_gold" from="Player" to="." method="_on_player_make_gold"]

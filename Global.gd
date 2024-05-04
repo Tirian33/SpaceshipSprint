@@ -12,7 +12,6 @@ var distance : int = 0
 var time : int = 0
 var item_list = {}
 var skin = 7
-var coin_mult = 1
 var life = 1
 
 #status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped
