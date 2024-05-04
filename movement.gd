@@ -20,6 +20,8 @@ const OBSTACLE_RANGE : int = 300
 var last_asteroid_y = -100
 var last_coin_y = -100
 
+var firstgame := 0
+
 signal resetDistance
 signal resetCoins
    
@@ -61,7 +63,6 @@ func _process(delta):
 		return
 
 	var dist_delta = scroll_speed * delta * 60
-
 	Global.distance += dist_delta
 
 	$PowerUpBar.value = $Player/PowerUpTimer.get_time_left()

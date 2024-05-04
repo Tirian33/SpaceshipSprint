@@ -2,7 +2,7 @@ extends Label
 
 
 func _process(_delta) -> void:
-	text = "Distance: " + str(Global.distance)
+	text = "Time: " + str(Global.time) + "         Distance: " + str(Global.distance)
 
 
 func _on_second_timer_timeout():
