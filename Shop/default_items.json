@@ -2,8 +2,8 @@
 	"Gold": 0,
 	"0":{
 		"Name": "Shield",
-		"Cost": 100,
-		"Status": 0,
+		"Cost": 0,
+		"Status": 1,
 		"Type": "Power",
 		"Description": "Gain temporary immunity to asteroids",
 		"Image": "res://images/Shop_items/ShieldImg.png"

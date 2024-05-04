@@ -1,6 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b50od5lyfon12"]
+[gd_scene load_steps=31 format=3 uid="uid://b50od5lyfon12"]
 
+[ext_resource type="Script" path="res://asteroid.gd" id="1_j7oka"]
 [ext_resource type="Texture2D" uid="uid://r7ebikuvvrmw" path="res://images/obstacles/coin-64x64.png" id="1_snwk3"]
+[ext_resource type="AudioStream" uid="uid://8b7qndlm1bfs" path="res://audio/coin.tres" id="2_6g1fc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_peany"]
 atlas = ExtResource("1_snwk3")
@@ -189,6 +191,7 @@ animations = [{
 radius = 33.0151
 
 [node name="Coin" type="Area2D" groups=["coins"]]
+script = ExtResource("1_j7oka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
@@ -197,3 +200,6 @@ sprite_frames = SubResource("SpriteFrames_doit0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.75, 0.75)
 shape = SubResource("CircleShape2D_gmoew")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6g1fc")

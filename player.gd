@@ -149,14 +149,16 @@ func power_second_chance():
 		life = 1
 
 
-func play_coin_sfx():
-	$SFX.stream = preload("res://audio/coin.tres")
-	$SFX.play()
+func play_coin_sfx(area):
+	area.visible = false
+	area.SFX.stream = preload("res://audio/coin.tres")
+	area.SFX.play()
 
 
-func play_explosion_sfx():
-	$SFX.stream = preload("res://audio/explosion.tres")
-	$SFX.play()
+func play_explosion_sfx(area):
+	area.visible = false
+	area.SFX.stream = preload("res://audio/explosion.tres")
+	area.SFX.play()
 
 
 func _on_area_entered_player(area):
@@ -164,8 +166,7 @@ func _on_area_entered_player(area):
 		return
 	
 	if area.is_in_group("coins"):
-		play_coin_sfx()
-		area.queue_free()
+		play_coin_sfx(area)
 		emit_signal("pluscoin")
 
 	elif area.is_in_group("powerup"):
@@ -184,16 +185,13 @@ func _on_area_entered_player(area):
 		area.queue_free()
 		print("Activated powerup!")
 	elif powerUpState == "shield":
-		play_explosion_sfx()
-		area.queue_free()
+		play_explosion_sfx(area)
 	elif powerUpState == "midas":
-		play_coin_sfx()
-		area.queue_free()
+		play_coin_sfx(area)
 		emit_signal("pluscoin")
 		emit_signal("pluscoin")
 	elif powerUpState == "rainbow":
-		play_coin_sfx()
-		area.queue_free()
+		play_coin_sfx(area)
 		emit_signal("pluscoin")
 	else:
 		die(false)

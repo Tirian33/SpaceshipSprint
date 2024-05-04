@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://xbjumey62l0t"]
+[gd_scene load_steps=37 format=3 uid="uid://xbjumey62l0t"]
 
 [ext_resource type="Script" path="res://asteroid.gd" id="1_5htpd"]
 [ext_resource type="Texture2D" uid="uid://sh78pfb4qdfv" path="res://images/obstacles/animated_asteroid.png" id="1_n12ko"]
+[ext_resource type="AudioStream" uid="uid://o3fpqa76a42p" path="res://audio/7424_Explosion.mp3" id="3_aubfd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxt6q"]
 atlas = ExtResource("1_n12ko")
@@ -243,3 +244,6 @@ sprite_frames = SubResource("SpriteFrames_12pem")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(2, -24, -7, -17, -10, -9, -21, -1, -25, 9, -25, 24, 16, 24, 22, 14, 25, 9, 25, 3, 18, -8, 15, -19, 15, -24)
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aubfd")
