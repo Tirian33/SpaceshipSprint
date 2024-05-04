@@ -142,7 +142,7 @@ func generate_powerup():
 		print_debug("No powerups purchased")
 		return
 
-	var choice : int = random.randi_range(0, len(effects))
+	var choice : int = random.randi_range(0, len(effects)-1)
 
 	var powerup : Area2D = powerup_placeholder.instantiate()
 

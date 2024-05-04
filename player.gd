@@ -44,7 +44,7 @@ func _process(delta):
 		if not playing_sound:
 			sfx.play()
 			playing_sound = true
-		
+
 	else:
 		spaceship.animation = "off"
 		if rotation <= spaceshipDown:
@@ -88,10 +88,8 @@ func die():
 		life -= 1
 		spaceship.visible = false
 		$CollisionShape2D.hide()
-		await(3.0)
 		$CollisionShape2D.show()
 		spaceship.visible = true
-	
 
 
 func send_normal_signals():
@@ -138,12 +136,12 @@ func power_rgb():
 	altSFX.play()
 	powerUpTimer.start(powerUpDuration)
 
+
 func power_smaller_ship():
-		#smaller ship power
-	if Global.item_list["5"]["Status"] == 1:
+	if Global.item_list["4"]["Status"] == 1:
 		spaceship.scale *= ship_scale
 		$CollisionShape2D.scale *= ship_scale
-	print_debug(Global.item_list["5"]["Status"])
+
 
 func power_second_chance():
 	if Global.item_list["6"]["Status"] == 1:
@@ -151,17 +149,30 @@ func power_second_chance():
 	else:
 		life = 1
 
+
 func power_double_value():
-	if Global.item_list["6"]["Status"] == 1:
+	if Global.item_list["5"]["Status"] == 1:
 		Global.coin_mult = 2
 	else:
 		Global.coin_mult = 1
+
+
+func play_coin_sfx():
+	$SFX.stream = preload("res://audio/coin.tres")
+	$SFX.play()
+
+
+func play_explosion_sfx():
+	$SFX.stream = preload("res://audio/explosion.tres")
+	$SFX.play()
+
 
 func _on_area_entered_player(area):
 	if not is_instance_valid(area):
 		return
 	
 	if area.is_in_group("coins"):
+		play_coin_sfx()
 		area.queue_free()
 		emit_signal("pluscoin")
 
@@ -181,13 +192,16 @@ func _on_area_entered_player(area):
 		area.queue_free()
 		print("Activated powerup!")
 	elif powerUpState == "shield":
-		area.break_apart()
+		play_explosion_sfx()
+		area.queue_free()
 	elif powerUpState == "midas":
-		area.become_coin()
+		play_coin_sfx()
+		area.queue_free()
 		emit_signal("pluscoin")
 		emit_signal("pluscoin")
 	elif powerUpState == "rainbow":
-		area.become_coin()
+		play_coin_sfx()
+		area.queue_free()
 		emit_signal("pluscoin")
 	else:
 		die()
@@ -199,4 +213,3 @@ func _on_power_up_timer_timeout():
 	send_normal_signals()
 
 	powerUpState = ""
-
