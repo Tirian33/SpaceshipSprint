@@ -36,30 +36,17 @@ var conetime : int = 0
 var ctwotime : int = 0
 var cthreetime : int = 0
 
-var tonetime : int = 0
-var ttwotime : int = 0
-var tthreetime : int = 0
-var tonedistance : int = 0
-var ttwodistance : int = 0
-var tthreedistance : int = 0
-var tonecoins : int = 0
-var ttwocoins : int = 0
-var tthreecoins : int = 0
 
-
-
-#status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped
+#status: 0 = unpurchased, 1 = purchased, 2 = unequipped, 3 = equipped, 4 = activated
 func _ready():
-	#new_save()               #for testing with save file
+	if not FileAccess.file_exists(path2):
+		initialize_records()
 	if not read_save():
 		new_save()
 	else:
 		item_list = read_save()
 	gold = item_list["Gold"]
 	get_skin()
-	
-	if not FileAccess.file_exists(path2):
-		initialize_records()
 
 
 #checking if a specific item is enabled
@@ -74,6 +61,7 @@ func is_item_enable(id_num):
 			return true
 	return false
 
+
 func get_skin():
 	for id in range(7,14):
 		if Global.is_item_enable(id):
@@ -85,8 +73,6 @@ func write_save(data):
 	file.store_string(JSON.stringify(data))
 	file.close()
 	file = null
-	
-	save_records(distance, coins, time)
 
 
 func read_save():
@@ -111,14 +97,16 @@ func initialize_records():
 	var initial_data = {
 		"records": []
 	}
+
 	save_data(initial_data)
 
+
 # Function to save game records
-func save_records(distance, coins, time):
+func save_records(record_distance, record_coins, record_time):
 	var record = {
-		"Distance": distance,
-		"Coins": coins,
-		"Time": time
+		"Distance": record_distance,
+		"Coins": record_coins,
+		"Time": record_time
 	}
 	var records = load_data()["records"]
 	records.append(record)
@@ -128,16 +116,17 @@ func save_records(distance, coins, time):
 	save_data(data_to_save)
 	calculate_records()
 
+
 func load_data():
 	var file = FileAccess.open(path2, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 	file.close()
 	return data
 
+
 func calculate_records():
 	var file = FileAccess.open(path2, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
-
 
 	var records = data["records"]
 	if records.size() > 0:
@@ -163,106 +152,70 @@ func calculate_records():
 		cthreecoins = 0
 		cthreetime = 0
 		
-		tonedistance = 0
-		ttwodistance = 0
-		tthreedistance = 0
-		tonecoins = 0
-		tonetime = 0
-		ttwocoins = 0
-		ttwotime = 0
-		tthreecoins = 0
-		tthreetime = 0
-		
 		for record in records:
-			var distance = record["Distance"]
-			var coins = record["Coins"]
-			var time = record["Time"]
-			if distance > onedistance:
+			var record_distance = record["Distance"]
+			var record_coins = record["Coins"]
+			var record_time = record["Time"]
+			if record_distance > onedistance:
 				threedistance = twodistance
 				twodistance = onedistance
-				onedistance = distance
+				onedistance = record_distance
 				threecoins = twocoins
 				twocoins = onecoins
-				onecoins = coins
+				onecoins = record_coins
 				threetime = twotime
 				twotime = onetime
-				onetime = time
-			elif distance > twodistance:
+				onetime = record_time
+			elif record_distance > twodistance:
 				threedistance = twodistance
-				twodistance = distance
+				twodistance = record_distance
 				threecoins = twocoins
-				twocoins = coins
+				twocoins = record_coins
 				threetime = twotime
-				twotime = time
-			elif distance > threedistance:
-				threedistance = distance
-				threecoins = coins
-				threetime = time
+				twotime = record_time
+			elif record_distance > threedistance:
+				threedistance = record_distance
+				threecoins = record_coins
+				threetime = record_time
 
 		for record in records:
-			var distance = record["Distance"]
-			var coins = record["Coins"]
-			var time = record["Time"]
-			if coins > conecoins:
+			var record_distance = record["Distance"]
+			var record_coins = record["Coins"]
+			var record_time = record["Time"]
+			if record_coins > conecoins:
 				cthreecoins = ctwocoins
 				ctwocoins = conecoins
-				conecoins = coins
+				conecoins = record_coins
 				cthreedistance = ctwodistance
 				ctwodistance = conedistance
-				conedistance = distance
+				conedistance = record_distance
 				cthreetime = ctwotime
 				ctwotime = conetime
-				conetime = time
-			elif coins > ctwocoins:
+				conetime = record_time
+			elif record_coins > ctwocoins:
 				cthreecoins = ctwocoins
-				ctwocoins = coins
+				ctwocoins = record_coins
 				cthreedistance = ctwodistance
-				ctwodistance = distance
+				ctwodistance = record_distance
 				cthreetime = ctwotime
-				ctwotime = time
-			elif coins > cthreecoins:
-				cthreecoins = coins
-				cthreedistance = distance
-				cthreetime = time
+				ctwotime = record_time
+			elif record_coins > cthreecoins:
+				cthreecoins = record_coins
+				cthreedistance = record_distance
+				cthreetime = record_time
 
-		for record in records:
-			var distance = record["Distance"]
-			var coins = record["Coins"]
-			var time = record["Time"]
-			if time > tonetime:
-				tthreetime = ttwotime
-				ttwotime = tonetime
-				tonetime = time
-				tthreedistance = ttwodistance
-				ttwodistance = tonedistance
-				tonedistance = distance
-				tthreecoins = ttwocoins
-				ttwocoins = tonecoins
-				tonecoins = coins
-			elif time > ttwotime:
-				tthreetime = ttwotime
-				ttwotime = time
-				tthreedistance = ttwodistance
-				ttwodistance = distance
-				tthreecoins = ttwocoins
-				ttwocoins = coins
-			elif time > tthreetime:
-				tthreetime = time
-				tthreedistance = distance
-				tthreecoins = coins
-	
 	file.close()
-	return data
+
 
 func save_data(data):
 	var file = FileAccess.open(path2, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
 	file.close()
 
-func game_completed(distance, coins, time):
-	save_records(distance, coins, time)
+
+func game_completed(record_distance, record_coins, record_time):
+	save_records(record_distance, record_coins, record_time)
+
 
 func _compare_distances(a, b):
 	return b["Distance"] - a["Distance"]
-
-

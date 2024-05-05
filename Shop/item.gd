@@ -14,6 +14,7 @@ extends Control
 
 var skin1 = "7"
 
+
 func _ready():
 	Global.skin_changed.connect(skin_off)
 	Global.status_changed.connect(update_status)
@@ -54,10 +55,12 @@ func update_status():
 		button.toggle_mode = true
 		button.button_pressed = true
 
+
 func save_update():
 	Global.item_list[item_key]["Status"] = status
 	Global.item_list["Gold"] = Global.gold
 	Global.write_save(Global.item_list)
+
 
 func _on_button_pressed():
 	if status == 0 and Global.gold >= cost:
@@ -109,6 +112,7 @@ func default_skin():
 		save_update()
 	else:
 		pass
+
 
 func skin_off():
 	if status == 3:

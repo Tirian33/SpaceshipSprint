@@ -216,6 +216,7 @@ func _on_player_death():
 	$"LoseScreen".show()
 
 	Global.item_list["Gold"] = Global.gold
+	Global.save_records(Global.distance, Global.coins, Global.time)
 	Global.write_save(Global.item_list)
 
 

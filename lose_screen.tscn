@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ekqa6157ulqd"]
+[gd_scene load_steps=6 format=3 uid="uid://ekqa6157ulqd"]
 
 [ext_resource type="Texture2D" uid="uid://dpcaehsjwi0om" path="res://images/LoseScreen.jpg" id="1_jdhrx"]
 [ext_resource type="Script" path="res://lose_screen.gd" id="2_pek7y"]
 [ext_resource type="StyleBox" uid="uid://ocoqko3w5rcd" path="res://Button.tres" id="3_ectcf"]
 [ext_resource type="Script" path="res://HighestDistanceLabel.gd" id="3_qoajk"]
 [ext_resource type="Script" path="res://HighestCoinsLabel.gd" id="4_6825q"]
-[ext_resource type="Script" path="res://HighestTimeLabel.gd" id="5_tbiyx"]
 
 [node name="LoseScreen" type="Sprite2D"]
 position = Vector2(576.5, 325)
@@ -70,18 +69,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 script = ExtResource("4_6825q")
-
-[node name="TimeLabel" type="Label" parent="."]
-visible = false
-offset_left = -245.0
-offset_top = 123.0
-offset_right = 218.0
-offset_bottom = 235.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-script = ExtResource("5_tbiyx")
 
 [connection signal="pressed" from="AgainButton" to="." method="_on_again_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

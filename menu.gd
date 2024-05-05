@@ -4,7 +4,6 @@ var game_scene = preload("res://game_main.tscn")
 
 
 func _on_start_button_pressed():
-	
 	if Global.firstTime == 0:
 		get_tree().change_scene_to_file("res://instructions.tscn")
 	
@@ -23,9 +22,9 @@ func _on_quit_button_pressed():
 
 
 func _on_new_save_button_pressed():
+	Global.initialize_records()
 	Global.new_save()
 	Global.gold = 0
 	Global.gold_update.emit()
 	Global.status_changed.emit()
-	Global.write_save(Global.item_list)
 	Global.get_skin()

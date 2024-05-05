@@ -20,6 +20,7 @@ func go_fast():
 	$GPUParticles2DMany.process_material = fast_stars
 	$GPUParticles2DTurbo.process_material = invisible_regular_stars
 
+
 func go_rainbow():
 	$GPUParticles2D.process_material = rainbow_stars
 	# We can't change the amount without resetting, so instead we enable an extra layer.
