@@ -5,6 +5,11 @@ extends Area2D
 @onready var sprite = $AnimatedSprite2D
 
 
+func _process(_delta):
+	if position.x < -60:
+		queue_free()
+
+
 func _ready():
 	sprite.play()
 
@@ -19,5 +24,7 @@ func set_type(type):
 			$"Fast".show()
 		3:
 			$"Rainbow".show()
+		4:
+			pass
 		_:
 			print_debug("Powerup not recognized")

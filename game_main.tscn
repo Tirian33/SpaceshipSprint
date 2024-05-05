@@ -60,6 +60,9 @@ wait_time = 0.4
 [node name="PowerupSpawnTimer" type="Timer" parent="."]
 wait_time = 40.0
 
+[node name="WormholeSpawnTimer" type="Timer" parent="."]
+wait_time = 90.0
+
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
 visible = false
 
@@ -141,6 +144,7 @@ text = "Play!"
 [connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
 [connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="doublecoin" from="Player" to="Coin Label" method="_on_player_doublecoin"]
 [connection signal="drop_heart" from="Player" to="." method="_on_player_drop_heart"]
 [connection signal="go_fast" from="Player" to="." method="_on_player_go_fast"]
 [connection signal="go_rainbow" from="Player" to="." method="_on_player_go_rainbow"]
@@ -150,7 +154,8 @@ text = "Play!"
 [connection signal="pressed" from="Player/Pause Active Node/Continue Button" to="Player/Pause Active Node/Continue Button" method="_on_pressed"]
 [connection signal="pressed" from="Player/Pause Active Node/Menu Button" to="Player/Pause Active Node/Menu Button" method="_on_pressed"]
 [connection signal="timeout" from="ObstacleTimer" to="." method="_on_asteroid_timer_timeout"]
-[connection signal="timeout" from="PowerupSpawnTimer" to="." method="generate_powerup"]
+[connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_powerup_spawn_timer_timeout"]
+[connection signal="timeout" from="WormholeSpawnTimer" to="." method="_on_wormhole_spawn_timer_timeout"]
 [connection signal="new_run" from="LoseScreen" to="." method="new_game"]
 [connection signal="timeout" from="SpeedRampTimer" to="." method="_on_speed_ramp_timer_timeout"]
 [connection signal="timeout" from="SecondTimer" to="DistanceLabel" method="_on_second_timer_timeout"]

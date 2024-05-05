@@ -1,12 +1,12 @@
 [gd_scene load_steps=51 format=3 uid="uid://chyyxojx7m5sk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_6kyja"]
+[ext_resource type="AudioStream" uid="uid://cuinmvvgm6ni" path="res://audio/wormhole-enter.tres" id="2_4wfc0"]
 [ext_resource type="Texture2D" uid="uid://rv7gi55qe7ld" path="res://images/rocket-1-off.png" id="2_npvkg"]
 [ext_resource type="AudioStream" uid="uid://8b7qndlm1bfs" path="res://audio/coin.tres" id="3_ubqny"]
 [ext_resource type="Texture2D" uid="uid://dlek1heerqgje" path="res://images/rocket-1-on/rocket-1-on.png" id="3_xdxjs"]
 [ext_resource type="Texture2D" uid="uid://d0y4hx2uajddb" path="res://images/rocket-1-on/rocket-2-on.png" id="4_h3qp5"]
 [ext_resource type="Texture2D" uid="uid://bxet2cpo7sfvk" path="res://images/rocket-1-on/rocket-3-on.png" id="5_akkwx"]
-[ext_resource type="AudioStream" uid="uid://xgxs6dlkh5bs" path="res://audio/Shield.tres" id="6_y3yxy"]
 [ext_resource type="Texture2D" uid="uid://cfxwbscg0xge5" path="res://images/basic-shield.png" id="7_wenru"]
 [ext_resource type="Texture2D" uid="uid://dfifswri70b8o" path="res://images/ship2/vehicle-2.png" id="8_5wrxw"]
 [ext_resource type="Texture2D" uid="uid://b0x5qdukxp6oi" path="res://images/ship2/vehicle-1.png" id="9_yc7vq"]
@@ -331,7 +331,7 @@ stream = SubResource("AudioStreamMP3_t5mdd")
 volume_db = -6.3
 
 [node name="MiscAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_y3yxy")
+stream = ExtResource("2_4wfc0")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ubqny")

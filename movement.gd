@@ -53,6 +53,7 @@ func new_game():
 	obstacles.clear()
 	generate_obstacles()
 	$ObstacleTimer.start()
+	$WormholeSpawnTimer.start()
 	emit_signal("resetCoins")
 	
 	$SecondTimer.start()
@@ -88,7 +89,6 @@ func _on_asteroid_timer_timeout():
 
 
 func generate_obstacles():
-	
 	var chance : int = random.randi_range(0, 10)
 	if chance >= 5:
 		generate_asteroid()
@@ -118,7 +118,6 @@ func generate_asteroid():
 
 
 func generate_coin():
-
 	var attemptedY = screen_size.y / 2 + random.randi_range(-OBSTACLE_RANGE, OBSTACLE_RANGE)
 
 	#Only generate the coin if it is not in an obstacle
@@ -131,7 +130,7 @@ func generate_coin():
 		last_coin_y = coin.position.y
 
 
-func generate_powerup():
+func _on_powerup_spawn_timer_timeout():
 	var effects = []
 
 	# Shield Powerup
@@ -156,10 +155,19 @@ func generate_powerup():
 
 	var choice : int = random.randi_range(0, len(effects)-1)
 
+	generate_powerup(effects[choice])
+
+
+func _on_wormhole_spawn_timer_timeout():
+	if asteroid_type != "rainbow":
+		generate_powerup(4)
+
+
+func generate_powerup(effect_type):
 	var powerup : Area2D = powerup_placeholder.instantiate()
 
-	powerup.set_meta("effectID", effects[choice])
-	powerup.set_type(effects[choice])
+	powerup.set_meta("effectID", effect_type)
+	powerup.set_type(effect_type)
 
 	powerup.position.x = screen_size.x + OBSTACLE_DELAY
 

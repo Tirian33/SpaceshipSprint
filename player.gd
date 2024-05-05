@@ -24,6 +24,7 @@ var alive = true
 var ship_scale = Vector2(0.5,0.5)
 var life = 1
 signal pluscoin
+signal doublecoin
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +59,7 @@ func _process(delta):
 	position += Vector2.DOWN * cust_grav * delta * pointing
 	
 	if position.y < -1 or position.y > 649:
-		die(true)
+		die(true, false)
 
 
 func start():
@@ -71,13 +72,16 @@ func start():
 	power_second_chance()
 
 
-func die(insta_kill):
+func die(insta_kill, end_run):
 	if life == 1 or insta_kill:
 		spaceship.visible = false
 		alive = false
 		sfx.stop()
 		altSFX.stop()
-		altSFX.stream = preload("res://audio/death.tres")
+		if end_run:
+			altSFX.stream = preload("res://audio/wormhole-enter.tres")
+		else:
+			altSFX.stream = preload("res://audio/death.tres")
 		altSFX.play()
 		send_normal_signals()
 		powerUpState = ""
@@ -164,7 +168,7 @@ func play_explosion_sfx(area):
 func _on_area_entered_player(area):
 	if not is_instance_valid(area):
 		return
-	
+
 	if area.is_in_group("coins"):
 		play_coin_sfx(area)
 		emit_signal("pluscoin")
@@ -179,6 +183,9 @@ func _on_area_entered_player(area):
 				power_fast()
 			3:
 				power_rgb()
+			4:
+				emit_signal("doublecoin")
+				die(true, true)
 			_:
 				print_debug("Powerup not recognized")
 
@@ -194,7 +201,7 @@ func _on_area_entered_player(area):
 		play_coin_sfx(area)
 		emit_signal("pluscoin")
 	else:
-		die(false)
+		die(false, false)
 
 
 func _on_power_up_timer_timeout():
