@@ -57,7 +57,7 @@ offset_left = 441.0
 offset_top = 529.0
 offset_right = 689.0
 offset_bottom = 607.0
-text = "Reset"
+text = "Restart Save"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]

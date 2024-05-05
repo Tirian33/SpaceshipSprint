@@ -24,7 +24,7 @@ func _on_quit_button_pressed():
 
 func _on_new_save_button_pressed():
 	Global.new_save()
-	Global.gold = 10000    #for testing
+	Global.gold = 0
 	Global.gold_update.emit()
 	Global.status_changed.emit()
 	Global.write_save(Global.item_list)
