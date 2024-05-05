@@ -60,6 +60,7 @@ wait_time = 0.4
 wait_time = 40.0
 
 [node name="WormholeSpawnTimer" type="Timer" parent="."]
+wait_time = 90.0
 
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
 visible = false
