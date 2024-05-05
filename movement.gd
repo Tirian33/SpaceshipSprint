@@ -53,6 +53,7 @@ func new_game():
 	$ObstacleTimer.start()
 	$WormholeSpawnTimer.start()
 	emit_signal("resetCoins")
+	emit_signal("resetDistance")
 	
 	$SecondTimer.start()
 
@@ -201,8 +202,6 @@ func _on_player_death():
 	$SpeedRampTimer.stop()
 
 	$SecondTimer.stop()
-	emit_signal("resetDistance")
-	emit_signal("resetCoins")
 
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
