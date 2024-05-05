@@ -7,6 +7,7 @@ extends Node
 var is_game_running: bool
 var random = RandomNumberGenerator.new()
 var obstacles : Array
+var deathType = 0 # 0 = nomral; 1 = wormhole
 
 # Obstacle Settings
 var asteroid_type = ""
@@ -48,6 +49,7 @@ func new_game():
 	$Player.start()
 	is_game_running = true
 	scroll = 0
+	deathType = 0
 	obstacles.clear()
 	generate_obstacles()
 	$ObstacleTimer.start()
@@ -202,12 +204,15 @@ func _on_player_death():
 	$SpeedRampTimer.stop()
 
 	$SecondTimer.stop()
+	$PowerupSpawnTimer.stop()
+	$WormholeSpawnTimer.stop()
 
 	for obstacle in obstacles:
 		if is_instance_valid(obstacle):
 			obstacle.queue_free()
 	obstacles.clear()
 	scroll_speed = 4
+	$"LoseScreen".death(deathType)
 	$"LoseScreen".show()
 
 	Global.item_list["Gold"] = Global.gold
@@ -258,3 +263,7 @@ func _on_speed_ramp_timer_timeout():
 
 func _on_player_drop_heart():
 	$"SecondChanceActive".visible = false
+
+
+func _on_player_doublecoinwormhole():
+	deathType = 1

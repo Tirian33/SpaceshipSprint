@@ -60,7 +60,6 @@ wait_time = 0.4
 wait_time = 40.0
 
 [node name="WormholeSpawnTimer" type="Timer" parent="."]
-wait_time = 90.0
 
 [node name="LoseScreen" parent="." instance=ExtResource("7_8mmo1")]
 visible = false
@@ -136,6 +135,7 @@ text = "Play!"
 [connection signal="resetCoins" from="." to="Coin Label" method="_on_gamemain_reset_coins"]
 [connection signal="resetDistance" from="." to="DistanceLabel" method="_on_gamemain_reset_distance"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="doublecoin" from="Player" to="." method="_on_player_doublecoinwormhole"]
 [connection signal="doublecoin" from="Player" to="Coin Label" method="_on_player_doublecoin"]
 [connection signal="drop_heart" from="Player" to="." method="_on_player_drop_heart"]
 [connection signal="go_fast" from="Player" to="." method="_on_player_go_fast"]

@@ -15,3 +15,4 @@ func _on_gamemain_reset_coins():
 
 func _on_player_doublecoin():
 	Global.coins *= 2
+	
