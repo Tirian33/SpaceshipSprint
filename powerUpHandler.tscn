@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhgqgx42vn80v"]
+[gd_scene load_steps=30 format=3 uid="uid://bhgqgx42vn80v"]
 
 [ext_resource type="Texture2D" uid="uid://csciv6v6os3hj" path="res://images/powerup/wheeling-2.png" id="1_ps5dl"]
 [ext_resource type="Script" path="res://powerup.gd" id="1_sl0ir"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dcuv38axapipn" path="res://images/Shop_items/Midas.png" id="15_yus0n"]
 [ext_resource type="Texture2D" uid="uid://b54shbeks3s0c" path="res://images/Shop_items/Fast.png" id="16_impto"]
 [ext_resource type="Texture2D" uid="uid://cjjts1whkwsqf" path="res://images/Shop_items/Rainbow.png" id="17_u2x23"]
+[ext_resource type="Texture2D" uid="uid://dqpgoqnuw5t74" path="res://images/powerup/wormhole.png" id="18_hly6o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_htk61"]
 animations = [{
@@ -65,6 +66,70 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ssw8o"]
 radius = 32.0156
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fwhy"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdbgp"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m218"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofi81"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u456n"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ags7c"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn75v"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkvc3"]
+atlas = ExtResource("18_hly6o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6py8s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fwhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdbgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m218")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofi81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u456n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ags7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn75v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkvc3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="PowerUpHandler" type="Area2D" groups=["powerup"]]
 editor_description = "0 = Shield
 1 = Midas
@@ -76,10 +141,8 @@ metadata/effectID = 0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_htk61")
-frame_progress = 0.754292
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_ssw8o")
 
 [node name="Shield" type="Sprite2D" parent="."]
@@ -101,3 +164,10 @@ texture = ExtResource("16_impto")
 visible = false
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("17_u2x23")
+
+[node name="Wormhole" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-2, 8)
+scale = Vector2(1.94141, 1.5625)
+sprite_frames = SubResource("SpriteFrames_6py8s")
+frame_progress = 0.853649

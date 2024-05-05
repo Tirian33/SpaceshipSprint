@@ -25,6 +25,7 @@ func set_type(type):
 		3:
 			$"Rainbow".show()
 		4:
-			pass
+			$"AnimatedSprite2D".hide()
+			$Wormhole.show()
 		_:
 			print_debug("Powerup not recognized")
