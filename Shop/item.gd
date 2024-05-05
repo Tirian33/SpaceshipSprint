@@ -33,14 +33,24 @@ func update_status():
 	if status == 0:
 		button.text = "Purchase"
 		button.button_pressed = false
+
 	if status == 1:
 		button.text = "Purchased"
+		button.toggle_mode = true
+		button.button_pressed = false
+
 	if status == 2:
 		button.text = "Equip"
 		button.toggle_mode = true
 		button.button_pressed = false
+
 	if status == 3:
 		button.text = "Equipped"
+		button.toggle_mode = true
+		button.button_pressed = true
+
+	if status == 4:
+		button.text = "Activated"
 		button.toggle_mode = true
 		button.button_pressed = true
 
@@ -54,8 +64,10 @@ func _on_button_pressed():
 		Global.gold -= cost
 		Global.gold_update.emit()
 		if type == "Power":
-			status = 1
-			button.text = "Purchased"
+			status = 4
+			button.text = "Activated"
+			button.toggle_mode = true
+			button.button_pressed = true
 		elif type == "Skin":
 			status = 2
 			button.text = "Equip"
@@ -64,19 +76,26 @@ func _on_button_pressed():
 		
 	elif status == 0 and Global.gold < Global.gold:
 		warning.text = "Not Enough Gold"
-		
+
 	elif status == 1:
-		warning.text = "Aready Purchased"
-		warning.visible = true
+		button.text = "Activated"
+		status = 4
+
 	elif status == 2:
 		Global.skin_changed.emit()
 		button.text = "Equipped"
 		status = 3
+
 	elif status == 3:
 		button.text = "Equip"
 		status = 2
 		button.button_pressed = false
 		Global.default_ship.emit()
+
+	elif status == 4:
+		button.text = "Purchased"
+		status = 1
+
 	save_update()
 	Global.get_skin()
 

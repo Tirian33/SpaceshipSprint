@@ -141,13 +141,13 @@ func power_rgb():
 
 
 func power_smaller_ship():
-	if Global.item_list["4"]["Status"] == 1:
+	if Global.item_list["4"]["Status"] == 4:
 		spaceship.scale *= ship_scale
 		$CollisionShape2D.scale *= ship_scale
 
 
 func power_second_chance():
-	if Global.item_list["6"]["Status"] == 1:
+	if Global.item_list["6"]["Status"] == 4:
 		life = 2
 	else:
 		life = 1

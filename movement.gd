@@ -33,14 +33,12 @@ func _ready():
 
 
 func new_game():
-	if Global.item_list["5"]["Status"] == 1:
+	if Global.item_list["5"]["Status"] == 4:
 		$PowerupSpawnTimer.start(20)
-		$"2xActive".visible = true
 	else:
 		$PowerupSpawnTimer.start(40)
-		$"2xActive".visible = false
 
-	if Global.item_list["6"]["Status"] == 1:
+	if Global.item_list["6"]["Status"] == 4:
 		$"SecondChanceActive".visible = true
 	else:
 		$"SecondChanceActive".visible = false
@@ -134,19 +132,19 @@ func _on_powerup_spawn_timer_timeout():
 	var effects = []
 
 	# Shield Powerup
-	if Global.item_list["0"]["Status"] == 1:
+	if Global.item_list["0"]["Status"] == 4:
 		effects.append_array([0, 0, 0, 0, 0])
 
 	# 2x Speed Powerup
-	if Global.item_list["1"]["Status"] == 1:
+	if Global.item_list["1"]["Status"] == 4:
 		effects.append_array([2, 2, 2, 2, 2])
 
 	# Midas Powerup
-	if Global.item_list["2"]["Status"] == 1:
+	if Global.item_list["2"]["Status"] == 4:
 		effects.append_array([1, 1, 1, 1, 1])
 
 	# Rainbow Powerup
-	if Global.item_list["3"]["Status"] == 1:
+	if Global.item_list["3"]["Status"] == 4:
 		effects.append(3)
 
 	if not len(effects):
@@ -159,7 +157,7 @@ func _on_powerup_spawn_timer_timeout():
 
 
 func _on_wormhole_spawn_timer_timeout():
-	if asteroid_type != "rainbow":
+	if scroll_speed == scroll_normal:
 		generate_powerup(4)
 
 

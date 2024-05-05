@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4r6hlg68k1xv"]
+[gd_scene load_steps=14 format=3 uid="uid://b4r6hlg68k1xv"]
 
 [ext_resource type="Script" path="res://movement.gd" id="1_lqokm"]
 [ext_resource type="PackedScene" uid="uid://dq0p1by0vqkb7" path="res://Starfield-background.tscn" id="1_vvpd2"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://ekqa6157ulqd" path="res://lose_screen.tscn" id="7_8mmo1"]
 [ext_resource type="Script" path="res://DistanceLabel.gd" id="11_rgntk"]
 [ext_resource type="Script" path="res://Coin Label.gd" id="12_2q63p"]
-[ext_resource type="Texture2D" uid="uid://bms8sgugbcmlp" path="res://images/Shop_items/DoubleValueImg.png" id="13_e4gci"]
 [ext_resource type="Texture2D" uid="uid://dtgx6migjr4mw" path="res://images/Shop_items/SecondChanceImg.png" id="14_xm5t0"]
 
 [node name="Game-main" type="Node"]
@@ -94,23 +93,16 @@ offset_bottom = 648.0
 max_value = 15.0
 show_percentage = false
 
-[node name="2xActive" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(33, 33)
-scale = Vector2(2, 2)
-texture = ExtResource("13_e4gci")
-
-[node name="SecondChanceActive" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(32, 616)
-scale = Vector2(2, 2)
-texture = ExtResource("14_xm5t0")
-
 [node name="TopBar" type="ProgressBar" parent="."]
 modulate = Color(0, 1, 1, 1)
 offset_right = 1152.0
 offset_bottom = 27.0
 show_percentage = false
+
+[node name="SecondChanceActive" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(2, 2)
+texture = ExtResource("14_xm5t0")
 
 [node name="DirectionsLabel" type="Label" parent="."]
 visible = false
