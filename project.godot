@@ -13,7 +13,8 @@ config_version=5
 config/name="Spaceship_Sprint"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://psuedo-icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

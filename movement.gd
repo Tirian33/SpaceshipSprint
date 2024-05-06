@@ -151,7 +151,7 @@ func _on_powerup_spawn_timer_timeout():
 		effects.append(3)
 
 	if not len(effects):
-		print_debug("No powerups purchased")
+		#print_debug("No powerups purchased")
 		return
 
 	var choice : int = random.randi_range(0, len(effects)-1)
@@ -185,7 +185,7 @@ func generate_powerup(effect_type):
 	add_child(powerup)
 	obstacles.append(powerup)
 
-	print_debug("POWERUP GENERATED")
+	#print_debug("POWERUP GENERATED")
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
