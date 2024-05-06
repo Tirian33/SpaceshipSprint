@@ -28,5 +28,5 @@ func set_type(type):
 			$AnimatedSprite2D.hide()
 			$Wormhole.play()
 			$Wormhole.show()
-		_:
-			print_debug("Powerup not recognized")
+		#_:
+			#print_debug("Powerup not recognized")

@@ -9,8 +9,8 @@ texture_filter = 1
 script = ExtResource("1_6dsx7")
 
 [node name="MainMenuArt" type="Sprite2D" parent="."]
-position = Vector2(585, 326.25)
-scale = Vector2(1.66286, 1.66291)
+position = Vector2(582.001, 326.25)
+scale = Vector2(1.67143, 1.66291)
 texture = ExtResource("2_hgxwe")
 
 [node name="StartButton" type="Button" parent="."]
