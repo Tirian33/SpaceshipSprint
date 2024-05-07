@@ -29,4 +29,4 @@ func set_type(type):
 			$Wormhole.play()
 			$Wormhole.show()
 		_:
-			print_debug("Powerup not recognized")
+			pass

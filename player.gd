@@ -61,7 +61,6 @@ func _process(delta):
 
 
 func start():
-	#print_debug("RESTART")
 	position.x = 75
 	position.y = 324 #75, 324
 	alive = true
@@ -184,8 +183,8 @@ func _on_area_entered_player(area):
 			4:
 				emit_signal("doublecoin")
 				die(true, true)
-			#_:
-				#print_debug("Powerup not recognized")
+			_:
+				pass
 
 		area.queue_free()
 		print("Activated powerup!")
@@ -203,8 +202,6 @@ func _on_area_entered_player(area):
 
 
 func _on_power_up_timer_timeout():
-	#print_debug("normal")
-
 	send_normal_signals()
 
 	powerUpState = ""
